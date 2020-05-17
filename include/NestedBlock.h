@@ -1,6 +1,8 @@
 #pragma once
 
-class NestedBlock
+#include "Block.h"
+
+class NestedBlock : public Block
 {
 public:
 };
