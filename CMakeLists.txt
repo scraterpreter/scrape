@@ -12,7 +12,7 @@ project (scrape)
 #    src/main.cpp
 #)
 
-file(GLOB SOURCES src/*.cc)
+file(GLOB_RECURSE SOURCES src/*.cc)
 
 # Add an executable with the above sources
 add_executable(scrape ${SOURCES})

@@ -1,7 +1,7 @@
 #include <string>
-#include "BinaryFunction.h"
+#include "NestedBlock/RoundBlock/BinaryFunction/BinaryFunction.h"
 
-class FunctionAdd : public BinaryFunction
+class FunctionMultiply : public BinaryFunction
 {
 public:
     std::string getValue() const override;

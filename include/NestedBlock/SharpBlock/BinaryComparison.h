@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "SharpBlock.h"
+#include "NestedBlock/SharpBlock/SharpBlock.h"
 
 class BinaryComparison : public SharpBlock
 {

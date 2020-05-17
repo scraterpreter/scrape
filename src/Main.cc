@@ -1,12 +1,12 @@
 #include <string>
 #include <iostream>
-#include "Constant.h"
-#include "RoundBlock.h"
-#include "FunctionAdd.h"
-#include "FunctionSubtract.h"
-#include "FunctionMultiply.h"
-#include "FunctionDivide.h"
-#include "BinaryLogical.h"
+#include "NestedBlock/RoundBlock/Constant.h"
+#include "NestedBlock/RoundBlock/RoundBlock.h"
+#include "NestedBlock/RoundBlock/BinaryFunction/FunctionAdd.h"
+#include "NestedBlock/RoundBlock/BinaryFunction/FunctionSubtract.h"
+#include "NestedBlock/RoundBlock/BinaryFunction/FunctionMultiply.h"
+#include "NestedBlock/RoundBlock/BinaryFunction/FunctionDivide.h"
+#include "NestedBlock/SharpBlock/BinaryLogical.h"
 
 int main()
 {
