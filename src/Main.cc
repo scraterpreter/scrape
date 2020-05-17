@@ -8,7 +8,10 @@
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionDivide.h"
 #include "NestedBlock/SharpBlock/BinaryLogical/LogicalAnd.h"
 #include "NestedBlock/SharpBlock/BinaryLogical/LogicalOr.h"
-#include "NestedBlock/SharpBlock/BinaryLogical/LogicalNot.h"
+#include "NestedBlock/SharpBlock/LogicalNot.h"
+#include "NestedBlock/SharpBlock/BinaryComparison/ComparisonE.h"
+#include "NestedBlock/SharpBlock/BinaryComparison/ComparisonLT.h"
+#include "NestedBlock/SharpBlock/BinaryComparison/ComparisonGT.h"
 
 int main()
 {
@@ -21,6 +24,10 @@ int main()
 
     FunctionAdd fa(Constant("69.420e-3"),Constant("-100"));
     std::cout<<fa.getValue()<<'\n';
+
+    ComparisonE yes(Constant("0"), Constant("0"));
+    LogicalNot no(yes);
+    std::cout << no.getValue() << '\n';
 
     // 69*(420+(1234/7))-69420
     FunctionDivide f1(Constant("1234"),Constant("7"));

@@ -1,6 +1,6 @@
 #include <string>
 #include "NestedBlock/SharpBlock/SharpBlock.h"
-#include "NestedBlock/SharpBlock/BinaryLogical/LogicalNot.h"
+#include "NestedBlock/SharpBlock/LogicalNot.h"
 
 LogicalNot::LogicalNot(const SharpBlock& v) : val(v) {}
 
