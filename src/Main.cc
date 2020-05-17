@@ -6,7 +6,9 @@
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionSubtract.h"
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionMultiply.h"
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionDivide.h"
-#include "NestedBlock/SharpBlock/BinaryLogical.h"
+#include "NestedBlock/SharpBlock/BinaryLogical/LogicalAnd.h"
+#include "NestedBlock/SharpBlock/BinaryLogical/LogicalOr.h"
+#include "NestedBlock/SharpBlock/BinaryLogical/LogicalNot.h"
 
 int main()
 {

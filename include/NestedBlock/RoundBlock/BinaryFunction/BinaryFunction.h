@@ -1,13 +1,14 @@
 #pragma once
 
 #include <string>
+#include "NestedBlock/NestedBlock.h"
 #include "NestedBlock/RoundBlock/RoundBlock.h"
 
 class BinaryFunction : public RoundBlock
 {
 public:
     std::string getValue() const override=0;
-    BinaryFunction(const RoundBlock& l,const RoundBlock& r);
+    BinaryFunction(const NestedBlock& l,const NestedBlock& r);
 protected:
-    const RoundBlock &left, &right;
+    const NestedBlock &left, &right;
 };

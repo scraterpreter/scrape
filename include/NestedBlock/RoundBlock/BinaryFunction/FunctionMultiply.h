@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include "NestedBlock/RoundBlock/BinaryFunction/BinaryFunction.h"
 
