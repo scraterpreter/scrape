@@ -5,5 +5,5 @@
 class StackedBlock : public Block
 {
 public:
-    virtual void exec();
+    virtual void exec() const=0;
 };
