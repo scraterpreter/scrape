@@ -7,5 +7,6 @@ class SharpBlock : public NestedBlock
 {
 public:
     virtual bool getBool() const=0;
-    virtual std::string getValue() const=0;
+    std::string getValue() const override;
+    double getDouble() const override;
 };

@@ -42,4 +42,15 @@ int main() {
     l1.clear();
     l1.add("perhapsNOT");
     s3.exec();
+
+    Constant c2("69"),c3("hello");
+    FunctionMultiply f1(c2,c3);
+    LooksSay s2(f1);
+    s2.exec();
+    ComparisonE comp1(c2,c3);
+    LooksSay s3(comp1);
+    s3.exec();
+    FunctionAdd f2(comp1,c2);
+    LooksSay s4(f2);
+    s4.exec();
 }

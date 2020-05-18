@@ -3,5 +3,5 @@
 
 std::string FunctionAdd::getValue() const
 {
-    return std::to_string(std::stod(left.getValue())+std::stod(right.getValue()));
+    return std::to_string(left.getDouble()+right.getDouble());
 }
