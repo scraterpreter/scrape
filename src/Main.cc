@@ -45,12 +45,12 @@ int main() {
 
     Constant c2("69"),c3("hello");
     FunctionMultiply f1(c2,c3);
-    LooksSay s2(f1);
-    s2.exec();
-    ComparisonE comp1(c2,c3);
-    LooksSay s3(comp1);
-    s3.exec();
-    FunctionAdd f2(comp1,c2);
-    LooksSay s4(f2);
+    LooksSay s4(f1);
     s4.exec();
+    ComparisonE comp1(c2,c3);
+    LooksSay s5(comp1);
+    s5.exec();
+    FunctionAdd f2(comp1,c2);
+    LooksSay s6(f2);
+    s6.exec();
 }
