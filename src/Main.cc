@@ -19,4 +19,14 @@ int main() {
     Constant c1("Hello, World!");
     LooksSay s1(c1);
     s1.exec();
+    Constant c2("69"),c3("hello");
+    FunctionMultiply f1(c2,c3);
+    LooksSay s2(f1);
+    s2.exec();
+    ComparisonE comp1(c2,c3);
+    LooksSay s3(comp1);
+    s3.exec();
+    FunctionAdd f2(comp1,c2);
+    LooksSay s4(f2);
+    s4.exec();
 }

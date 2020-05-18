@@ -7,8 +7,8 @@ class LogicalNot : public SharpBlock
 {
 public:
     bool getBool() const override;
-    std::string getValue() const override;
+    //std::string getValue() const override;
     LogicalNot(const SharpBlock& v);
-protected:
+private:
     const SharpBlock &val;
 };

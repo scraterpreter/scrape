@@ -8,8 +8,8 @@ bool LogicalNot::getBool() const
 {
     return !val.getBool();
 }
-
+/*
 std::string LogicalNot::getValue() const
 {
     return std::to_string(getBool() ? 1 : 0);
-}
+}*/
