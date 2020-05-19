@@ -12,3 +12,4 @@ void Variable::setValue(std::string v)
 }
 
 Variable::Variable(std::string v) : val(v) {}
+Variable::Variable(){} // default constructor

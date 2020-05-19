@@ -20,6 +20,7 @@
 #include "StackedBlock/Control/IfBlock.h"
 #include "StackedBlock/Control/IfElseBlock.h"
 #include "StackedBlock/Control/RepeatUntilBlock.h"
+#include "StackedBlock/VariableOperation/SetVariable.h"
 
 int main() {
 {
@@ -93,5 +94,22 @@ int main() {
     LooksSay sayBanner(banner);
     sayBanner.exec();
 
+}
+{
+    // Test variable operations 
+    Constant banner("--- VARIABLE OPERATION TEST ---");
+    LooksSay sayBanner(banner);
+    sayBanner.exec();
+    Constant ree("REEE");
+    Variable v; 
+    LooksSay(v).exec();
+    SetVariable sv(v,ree);
+    sv.exec();
+    LooksSay(v).exec();
+    Constant c1("69"),c2("420");
+    FunctionAdd f1(c1,c2);
+    SetVariable sv2(v,f1);
+    sv2.exec();
+    LooksSay(v).exec();
 }
 }
