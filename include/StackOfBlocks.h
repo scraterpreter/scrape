@@ -6,7 +6,9 @@
 class StackOfBlocks
 {
 public:
-  void execAll();
+  void execAll() const;
+  StackOfBlocks(const std::vector<StackedBlock*>& b);
 private:
-  std::vector<StackedBlocks> blocks;
-}
+  const std::vector<StackedBlock*>& blocks; 
+    // vector of StackedBlock pointers
+};
