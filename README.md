@@ -1,4 +1,4 @@
-**scrape**: the **SCRA**ch inter**P**r**E**ter
+**scrape**: the **SCRA**tch inter**P**r**E**ter
 
 ## Build Instructions
 ### Linux
