@@ -17,9 +17,9 @@
 #include "StackedBlock/Looks/LooksSay.h"
 #include "StackedBlock/Looks/LooksThink.h"
 #include "StackOfBlocks.h"
-#include "StackedBlock/IfBlock.h"
-#include "StackedBlock/IfElseBlock.h"
-#include "StackedBlock/RepeatUntilBlock.h"
+#include "StackedBlock/Control/IfBlock.h"
+#include "StackedBlock/Control/IfElseBlock.h"
+#include "StackedBlock/Control/RepeatUntilBlock.h"
 
 int main() {
 {
