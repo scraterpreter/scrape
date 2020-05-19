@@ -90,10 +90,29 @@ int main() {
 }
 {
     // Test repeat until
-    Constant banner("--- REPEAT UNTIL TEST ---");
+    Constant banner("--- REPEAT UNTIL TEST ---\nComputes first power of 2 that is greater than one billion!");
     LooksSay sayBanner(banner);
     sayBanner.exec();
-
+    Constant c1("2"),c2("1e9");
+    Variable v;
+    SetVariable(v,c1).exec();
+    ComparisonGT comp(v,c2);
+    FunctionMultiply f1(v,c1);
+    SetVariable sv(v,f1);
+    std::vector<StackedBlock*> b={&sv};
+    RepeatUntilBlock ru(comp,b);
+    ru.exec();
+    LooksSay(v).exec();
+    /*Constant c1("69"),c2("70"),c3("1");
+    Variable v;
+    ComparisonLT comp(v,c2);
+    LooksSay(comp).exec();
+    SetVariable(v,c1).exec();
+    LooksSay(comp).exec();
+    FunctionAdd f1(v,c3);
+    SetVariable(v,f1).exec();
+    LooksSay(comp).exec();
+   */ 
 }
 {
     // Test variable operations 
