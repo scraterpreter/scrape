@@ -19,6 +19,7 @@
 #include "StackOfBlocks.h"
 #include "StackedBlock/IfBlock.h"
 #include "StackedBlock/IfElseBlock.h"
+#include "StackedBlock/RepeatUntilBlock.h"
 
 int main() {
 {
@@ -85,5 +86,12 @@ int main() {
     StackOfBlocks stack2(ree);
     IfElseBlock ieb(comp,stack,stack2);
     ieb.exec();
+}
+{
+    // Test repeat until
+    Constant banner("--- REPEAT UNTIL TEST ---");
+    LooksSay sayBanner(banner);
+    sayBanner.exec();
+
 }
 }
