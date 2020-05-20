@@ -52,3 +52,4 @@ void List::replace(int index, std::string v)
 }
 
 List::List(std::vector<std::string> v) : val(v) {}
+List::List(){}

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Block.h"
+#include <string>
 
 class NestedBlock : public Block
 {

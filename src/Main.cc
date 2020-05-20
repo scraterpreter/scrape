@@ -21,6 +21,7 @@
 #include "StackedBlock/Control/IfElseBlock.h"
 #include "StackedBlock/Control/RepeatUntilBlock.h"
 #include "StackedBlock/VariableOperation/SetVariable.h"
+#include "StackedBlock/ListOperation/ListAddItem.h"
 
 int main() {
 {
@@ -130,5 +131,21 @@ int main() {
     SetVariable sv2(v,f1);
     sv2.exec();
     LooksSay(v).exec();
+}
+{
+    // Test list operations 
+    Constant banner("--- LIST OPERATION TEST ---");
+    LooksSay sayBanner(banner);
+    sayBanner.exec();
+    List l;
+    LooksSay(l).exec();
+    Constant c1("2"),c2("3"),c3("5");
+    ListAddItem a1(l,c1);
+    a1.exec();
+    LooksSay(l).exec();
+    ListAddItem a2(l,c2),a3(l,c3);
+    a3.exec();
+    a2.exec();
+    LooksSay(l).exec();
 }
 }
