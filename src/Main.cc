@@ -22,6 +22,7 @@
 #include "StackedBlock/Control/RepeatUntilBlock.h"
 #include "StackedBlock/VariableOperation/SetVariable.h"
 #include "StackedBlock/ListOperation/ListAddItem.h"
+#include "StackedBlock/ListOperation/ListDeleteAll.h"
 
 int main() {
 {
@@ -146,6 +147,10 @@ int main() {
     ListAddItem a2(l,c2),a3(l,c3);
     a3.exec();
     a2.exec();
+    LooksSay(l).exec();
+
+    ListDeleteAll rmrf(l);
+    rmrf.exec();
     LooksSay(l).exec();
 }
 }
