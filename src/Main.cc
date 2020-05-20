@@ -23,6 +23,7 @@
 #include "StackedBlock/VariableOperation/SetVariable.h"
 #include "StackedBlock/ListOperation/ListAddItem.h"
 #include "StackedBlock/ListOperation/ListDeleteAll.h"
+#include "StackedBlock/ListOperation/ListDeleteItem.h"
 
 int main() {
 {
@@ -149,8 +150,22 @@ int main() {
     a2.exec();
     LooksSay(l).exec();
 
-    ListDeleteAll rmrf(l);
+/*    ListDeleteAll rmrf(l);
     rmrf.exec();
+    LooksSay(l).exec();*/
+    Constant c4("0"),c5("1.5");
+    ListDeleteItem d1(l,c4);
+    d1.exec(); //should do NOTHING
+    LooksSay(l).exec();
+    ListDeleteItem d2(l,c5);
+    d2.exec(); //should delete first item
+    LooksSay(l).exec();
+    ListDeleteItem d3(l,c1);
+    d3.exec();
+    LooksSay(l).exec();
+    d3.exec(); //should do NOTHING
+    LooksSay(l).exec();
+    d2.exec(); //should delete first item (clearing the list)
     LooksSay(l).exec();
 }
 }

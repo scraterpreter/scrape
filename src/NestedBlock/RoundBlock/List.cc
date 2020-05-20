@@ -51,5 +51,10 @@ void List::replace(int index, std::string v)
     val[index] = v;
 }
 
+int List::length()
+{
+    return val.size();
+}
+
 List::List(std::vector<std::string> v) : val(v) {}
 List::List(){}
