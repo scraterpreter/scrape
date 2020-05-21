@@ -1,6 +1,6 @@
 #include <vector>
 #include <string>
-#include "NestedBlock/RoundBlock/List.h"
+#include "NestedBlock/RoundBlock/List/List.h"
 
 std::string List::getValue() const
 {
@@ -51,7 +51,7 @@ void List::replace(int index, std::string v)
     val[index] = v;
 }
 
-int List::length()
+int List::length() const
 {
     return val.size();
 }
