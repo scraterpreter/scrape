@@ -25,6 +25,7 @@
 #include "StackedBlock/ListOperation/ListDeleteAll.h"
 #include "StackedBlock/ListOperation/ListDeleteItem.h"
 #include "StackedBlock/ListOperation/ListInsertItem.h"
+#include "StackedBlock/ListOperation/ListReplaceItem.h"
 
 int main() {
 {
@@ -142,7 +143,7 @@ int main() {
     sayBanner.exec();
     List l;
     LooksSay(l).exec();
-    Constant c1("2"),c2("3"),c3("5");
+    Constant c1("2"),c2("3"),c3("5"),c4("bf"),c5("4"),c6("1");
     ListAddItem a1(l,c1);
     a1.exec();
     LooksSay(l).exec();
@@ -150,40 +151,8 @@ int main() {
     a3.exec();
     a2.exec();
     LooksSay(l).exec();
-
-/*    ListDeleteAll rmrf(l);
-    rmrf.exec();
-    LooksSay(l).exec();*/
-    Constant c4("0"),c5("1.5"),c6("420"),c7("6");
-    ListDeleteItem d1(l,c4);
-    d1.exec(); //should do NOTHING
-    LooksSay(l).exec();
-    ListDeleteItem d2(l,c5);
-    d2.exec(); //should delete first item
-    LooksSay(l).exec();
-    ListDeleteItem d3(l,c1);
-    d3.exec();
-    LooksSay(l).exec();
-    d3.exec(); //should do NOTHING
-    LooksSay(l).exec();
-    d2.exec(); //should delete first item (clearing the list)
-    LooksSay(l).exec();
-    a3.exec();
-    a2.exec();
-    a3.exec();
-    a1.exec();
-    LooksSay(l).exec();
-    ListInsertItem i1(l,c7,c6);
-    i1.exec(); //should do NOTHING
-    LooksSay(l).exec();
-    ListInsertItem i2(l,c3,c6);
-    i2.exec();
-    LooksSay(l).exec();
-    ListInsertItem i3(l,c4,c6);
-    i3.exec(); //should do NOTHING
-    LooksSay(l).exec();
-    ListInsertItem i4(l,c1,c6);
-    i4.exec();
+    ListReplaceItem r1(l,c2,c4);
+    r1.exec();
     LooksSay(l).exec();
 }
 }
