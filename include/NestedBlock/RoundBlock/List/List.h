@@ -16,7 +16,9 @@ public:
     void clear();
     void insert(int index, std::string v);
     void replace(int index, std::string v);
+    int length() const;
     List(std::vector<std::string> v);
+    List();
 private:
     std::vector<std::string> val;
 };
