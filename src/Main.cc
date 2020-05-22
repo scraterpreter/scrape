@@ -20,14 +20,19 @@ std::shared_ptr<StackOfBlocks> resolveStackOfBlocks(BlockTable &blocktable, json
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        std::cout << "Please specify the name of the .scrape file.\n";
+        std::cerr << "Please specify the name of the .scrape file.\n";
         return 1;
     } else if (argc > 2) {
-        std::cout << "Please specify only the name of the .scrape file.\n";
+        std::cerr << "Please specify only the name of the .scrape file.\n";
         return 1;
     }
 
     std::ifstream scrapefile(argv[1]);
+    if(!scrapefile.good())
+    {
+        std::cerr << "Error opening file \""<<argv[1]<<"\"!\n";
+        return 1;
+    }
     json scrapejson;
     scrapefile >> scrapejson;
 
