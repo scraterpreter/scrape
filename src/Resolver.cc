@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <memory>
 
 #include "Block.h"
 #include "BlockTable.h"
@@ -32,29 +33,29 @@
 
 using json = nlohmann::json;
 
-Block* resolveShadow(BlockTable &blocktable, json shadow) {
+std::shared_ptr<Block> resolveShadow(BlockTable &blocktable, json shadow) {
     if (shadow.at(0) == 1) {
         return blocktable.getIndex(std::stoi(shadow[1].get<std::string>()));
     } else {
-        return new Constant(shadow.at(1));
+        return std::make_shared<Constant>(shadow.at(1));
     }
 }
 
-StackOfBlocks* resolveStackOfBlocks(BlockTable &blocktable, json blocks, std::string start) {
+std::shared_ptr<StackOfBlocks> resolveStackOfBlocks(BlockTable &blocktable, json blocks, std::string start) {
     std::string next = start;
-    std::vector<StackedBlock*> stackvector;
+    std::vector<std::shared_ptr<StackedBlock>> stackvector;
     while (true) {
-        stackvector.push_back((StackedBlock*)(blocktable.getIndex(std::stoi(next))));
+        stackvector.push_back(std::static_pointer_cast<StackedBlock>(blocktable.getIndex(std::stoi(next))));
         if (blocks[next]["next"].is_null()) {
             break;
         }
         next = blocks[next]["next"].get<std::string>();
     }
-    StackOfBlocks *stack = new StackOfBlocks(stackvector);
+    std::shared_ptr<StackOfBlocks> stack = std::make_shared<StackOfBlocks>(stackvector);
     return stack;
 }
 
-Block* resolveBlock(BlockTable &blocktable, json blocks, std::string id) {
+std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::string id) {
     int intid = std::stoi(id);
     json block = blocks[id];
     json inputs = block["inputs"];
@@ -65,70 +66,70 @@ Block* resolveBlock(BlockTable &blocktable, json blocks, std::string id) {
         return blocktable.getIndex(intid);
     }
 
-    Block *b;
+    std::shared_ptr<Block> b;
 
     if (opcode == "control_repeat_until") {
-        SharpBlock *con = (SharpBlock*)(resolveShadow(blocktable, inputs["CONDITION"]));
-        StackOfBlocks *stk = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK"][1].get<std::string>());
-        b = new RepeatUntilBlock(*con, *stk);
+        std::shared_ptr<SharpBlock> con = std::static_pointer_cast<SharpBlock>(resolveShadow(blocktable, inputs["CONDITION"]));
+        std::shared_ptr<StackOfBlocks> stk = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK"][1].get<std::string>());
+        b = std::make_shared<RepeatUntilBlock>(*con, *stk);
     } else if (opcode == "control_if") {
-        SharpBlock *con = (SharpBlock*)(resolveShadow(blocktable, inputs["CONDITION"]));
-        StackOfBlocks *stk = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK"][1].get<std::string>());
-        b = new IfBlock(*con, *stk);
+        std::shared_ptr<SharpBlock> con = std::static_pointer_cast<SharpBlock>(resolveShadow(blocktable, inputs["CONDITION"]));
+        std::shared_ptr<StackOfBlocks> stk = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK"][1].get<std::string>());
+        b = std::make_shared<IfBlock>(*con, *stk);
     } else if (opcode == "control_if_else") {
-        SharpBlock *con = (SharpBlock*)(resolveShadow(blocktable, inputs["CONDITION"]));
-        StackOfBlocks *stk1 = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK"][1].get<std::string>());
-        StackOfBlocks *stk2 = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK2"][1].get<std::string>());
-        b = new IfElseBlock(*con, *stk1, *stk2);
+        std::shared_ptr<SharpBlock> con = std::static_pointer_cast<SharpBlock>(resolveShadow(blocktable, inputs["CONDITION"]));
+        std::shared_ptr<StackOfBlocks> stk1 = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK"][1].get<std::string>());
+        std::shared_ptr<StackOfBlocks> stk2 = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK2"][1].get<std::string>());
+        b = std::make_shared<IfElseBlock>(*con, *stk1, *stk2);
     } else if (opcode == "data_setvariableto") {
-        NestedBlock *val = (NestedBlock*)(resolveShadow(blocktable, inputs["VALUE"]));
-        Variable *var = (Variable*)(resolveShadow(blocktable, fields["VARIABLE"]));
-        b = new SetVariable(*var, *val);
+        std::shared_ptr<NestedBlock> val = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["VALUE"]));
+        std::shared_ptr<Variable> var = std::static_pointer_cast<Variable>(resolveShadow(blocktable, fields["VARIABLE"]));
+        b = std::make_shared<SetVariable>(*var, *val);
     } else if (opcode == "looks_say") {
-        NestedBlock *msg = (NestedBlock*)(resolveShadow(blocktable, inputs["MESSAGE"]));
-        b = new LooksSay(*msg);
+        std::shared_ptr<NestedBlock> msg = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["MESSAGE"]));
+        b = std::make_shared<LooksSay>(*msg);
     } else if (opcode == "looks_think") {
-        NestedBlock *msg = (NestedBlock*)(resolveShadow(blocktable, inputs["MESSAGE"]));
-        b = new LooksThink(*msg);
+        std::shared_ptr<NestedBlock> msg = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["MESSAGE"]));
+        b = std::make_shared<LooksThink>(*msg);
     } else if (opcode == "operator_add") {
-        NestedBlock *num1 = (NestedBlock*)(resolveShadow(blocktable, inputs["NUM1"]));
-        NestedBlock *num2 = (NestedBlock*)(resolveShadow(blocktable, inputs["NUM2"]));
-        b = new FunctionAdd(*num1, *num2);
+        std::shared_ptr<NestedBlock> num1 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM1"]));
+        std::shared_ptr<NestedBlock> num2 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM2"]));
+        b = std::make_shared<FunctionAdd>(*num1, *num2);
     } else if (opcode == "operator_subtract") {
-        NestedBlock *num1 = (NestedBlock*)(resolveShadow(blocktable, inputs["NUM1"]));
-        NestedBlock *num2 = (NestedBlock*)(resolveShadow(blocktable, inputs["NUM2"]));
-        b = new FunctionSubtract(*num1, *num2);
+        std::shared_ptr<NestedBlock> num1 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM1"]));
+        std::shared_ptr<NestedBlock> num2 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM2"]));
+        b = std::make_shared<FunctionSubtract>(*num1, *num2);
     } else if (opcode == "operator_multiply") {
-        NestedBlock *num1 = (NestedBlock*)resolveShadow(blocktable, inputs["NUM1"]);
-        NestedBlock *num2 = (NestedBlock*)resolveShadow(blocktable, inputs["NUM2"]);
-        b = new FunctionMultiply(*num1, *num2);
+        std::shared_ptr<NestedBlock> num1 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM1"]));
+        std::shared_ptr<NestedBlock> num2 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM2"]));
+        b = std::make_shared<FunctionMultiply>(*num1, *num2);
     } else if (opcode == "operator_divide") {
-        NestedBlock *num1 = (NestedBlock*)resolveShadow(blocktable, inputs["NUM1"]);
-        NestedBlock *num2 = (NestedBlock*)resolveShadow(blocktable, inputs["NUM2"]);
-        b = new FunctionDivide(*num1, *num2);
+        std::shared_ptr<NestedBlock> num1 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM1"]));
+        std::shared_ptr<NestedBlock> num2 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM2"]));
+        b = std::make_shared<FunctionDivide>(*num1, *num2);
     } else if (opcode == "operator_lt") {
-        NestedBlock *opr1 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND1"]);
-        NestedBlock *opr2 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND2"]);
-        b = new ComparisonLT(*opr1, *opr2);
+        std::shared_ptr<NestedBlock> opr1 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["OPERAND1"]));
+        std::shared_ptr<NestedBlock> opr2 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["OPERAND2"]));
+        b = std::make_shared<ComparisonLT>(*opr1, *opr2);
     } else if (opcode == "operator_equals") {
-        NestedBlock *opr1 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND1"]);
-        NestedBlock *opr2 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND2"]);
-        b = new ComparisonE(*opr1, *opr2);
+        std::shared_ptr<NestedBlock> opr1 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["OPERAND1"]));
+        std::shared_ptr<NestedBlock> opr2 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["OPERAND2"]));
+        b = std::make_shared<ComparisonE>(*opr1, *opr2);
     } else if (opcode == "operator_gt") {
-        NestedBlock *opr1 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND1"]);
-        NestedBlock *opr2 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND2"]);
-        b = new ComparisonGT(*opr1, *opr2);
+        std::shared_ptr<NestedBlock> opr1 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["OPERAND1"]));
+        std::shared_ptr<NestedBlock> opr2 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["OPERAND2"]));
+        b = std::make_shared<ComparisonGT>(*opr1, *opr2);
     } else if (opcode == "operator_and") {
-        SharpBlock *opr1 = (SharpBlock*)resolveShadow(blocktable, inputs["OPERAND1"]);
-        SharpBlock *opr2 = (SharpBlock*)resolveShadow(blocktable, inputs["OPERAND2"]);
-        b = new LogicalAnd(*opr1, *opr2);
+        std::shared_ptr<SharpBlock> opr1 = std::static_pointer_cast<SharpBlock>(resolveShadow(blocktable, inputs["OPERAND1"]));
+        std::shared_ptr<SharpBlock> opr2 = std::static_pointer_cast<SharpBlock>(resolveShadow(blocktable, inputs["OPERAND2"]));
+        b = std::make_shared<LogicalAnd>(*opr1, *opr2);
     } else if (opcode == "operator_or") {
-        SharpBlock *opr1 = (SharpBlock*)resolveShadow(blocktable, inputs["OPERAND1"]);
-        SharpBlock *opr2 = (SharpBlock*)resolveShadow(blocktable, inputs["OPERAND2"]);
-        b = new LogicalOr(*opr1, *opr2);
+        std::shared_ptr<SharpBlock> opr1 = std::static_pointer_cast<SharpBlock>(resolveShadow(blocktable, inputs["OPERAND1"]));
+        std::shared_ptr<SharpBlock> opr2 = std::static_pointer_cast<SharpBlock>(resolveShadow(blocktable, inputs["OPERAND2"]));
+        b = std::make_shared<LogicalOr>(*opr1, *opr2);
     } else if (opcode == "operator_not") {
-        SharpBlock *opr = (SharpBlock*)resolveShadow(blocktable, inputs["OPERAND"]);
-        b = new LogicalNot(*opr);
+        std::shared_ptr<SharpBlock> opr = std::static_pointer_cast<SharpBlock>(resolveShadow(blocktable, inputs["OPERAND"]));
+        b = std::make_shared<LogicalNot>(*opr);
     }
     blocktable.setIndex(intid, b);
     return b;

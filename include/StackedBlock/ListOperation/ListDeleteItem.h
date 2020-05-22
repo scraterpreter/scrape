@@ -1,3 +1,4 @@
+#include <memory>
 #include "StackedBlock/StackedBlock.h"
 
 class List;
@@ -6,9 +7,9 @@ class NestedBlock;
 class ListDeleteItem: public StackedBlock
 {
 public:
-    ListDeleteItem(List& l,const NestedBlock& i);
+    ListDeleteItem(std::shared_ptr<List> l,const std::shared_ptr<NestedBlock> i);
     void exec() const override;
 private:
-    List& list;
-    const NestedBlock& index;
+    std::shared_ptr<List> list;
+    const std::shared_ptr<NestedBlock> index;
 };

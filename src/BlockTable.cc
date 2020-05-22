@@ -1,13 +1,14 @@
 #include <vector>
 #include "BlockTable.h"
 #include "Block.h"
+#include <memory>
 
-void BlockTable::setIndex(int index, Block* block)
+void BlockTable::setIndex(int index, std::shared_ptr<Block> block)
 {
     blocks[index] = block;
 }
 
-Block* BlockTable::getIndex(int index) const
+std::shared_ptr<Block> BlockTable::getIndex(int index) const
 {
     return blocks[index];
 }

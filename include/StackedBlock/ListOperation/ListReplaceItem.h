@@ -1,3 +1,4 @@
+#include <memory>
 #include "StackedBlock/StackedBlock.h"
 
 class List;
@@ -6,11 +7,11 @@ class NestedBlock;
 class ListReplaceItem: public StackedBlock
 {
 public:
-    ListReplaceItem(List& l,const NestedBlock& i,
-        const NestedBlock& val);
+    ListReplaceItem(std::shared_ptr<List> l,const std::shared_ptr<NestedBlock> i,
+        const std::shared_ptr<NestedBlock> val);
     void exec() const override;
 private:
-    List& list;
-    const NestedBlock& index;
-    const NestedBlock& value;
+    std::shared_ptr<List> list;
+    const std::shared_ptr<NestedBlock> index;
+    const std::shared_ptr<NestedBlock> value;
 };

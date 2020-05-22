@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include "NestedBlock/RoundBlock/RoundBlock.h"
 
 class List : public RoundBlock
@@ -17,8 +18,8 @@ public:
     void insert(int index, std::string v);
     void replace(int index, std::string v);
     int length() const;
-    List(std::vector<std::string> v);
+    List(std::shared_ptr<std::vector<std::string>> v);
     List();
 private:
-    std::vector<std::string> val;
+    std::shared_ptr<std::vector<std::string>> val;
 };

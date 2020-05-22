@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <memory>
 
 #include "StackOfBlocks.h"
 #include "BlockTable.h"
@@ -13,9 +14,9 @@
 
 using json = nlohmann::json;
 
-Block* resolveBlock(BlockTable &blocktable, json blocks, std::string id);
-Block* resolveShadow(BlockTable &blocktable, json shadow);
-StackOfBlocks* resolveStackOfBlocks(BlockTable &blocktable, json blocks, std::string start);
+std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::string id);
+std::shared_ptr<Block> resolveShadow(BlockTable &blocktable, json shadow);
+std::shared_ptr<StackOfBlocks> resolveStackOfBlocks(BlockTable &blocktable, json blocks, std::string start);
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -33,22 +34,22 @@ int main(int argc, char* argv[]) {
     BlockTable scrapestate(scrapejson["ids"].get<int>()+1);
 
     for (auto& variable:scrapejson["container"]["variables"].items()) {
-        scrapestate.setIndex(std::stoi(variable.key()), new Variable(std::to_string(scrapejson["container"]["variables"][variable.key()].get<int>())));
+        std::shared_ptr<Variable> v = std::make_shared<Variable>(std::to_string(scrapejson["container"]["variables"][variable.key()].get<int>()));
+        scrapestate.setIndex(std::stoi(variable.key()), v);
     }
 
     for (auto& list:scrapejson["container"]["lists"].items()) {
-        scrapestate.setIndex(std::stoi(list.key()), new List(scrapejson["container"]["lists"][list.key()].get<std::vector<std::string>>()));
+        std::shared_ptr<List> l = std::make_shared<List>(scrapejson["container"]["lists"][list.key()].get<std::vector<std::string>>());
+        scrapestate.setIndex(std::stoi(list.key()), l);
     }
 
     for (auto& id:scrapejson["build_order"].items()) {
         resolveBlock(scrapestate, scrapejson["blocks"], id.value());
     }
 
-    StackOfBlocks* mainstack = resolveStackOfBlocks(scrapestate, scrapejson["blocks"], scrapejson["start"].get<std::string>());
+    std::shared_ptr<StackOfBlocks> mainstack = resolveStackOfBlocks(scrapestate, scrapejson["blocks"], scrapejson["start"].get<std::string>());
 
     mainstack->execAll();
-
-    delete mainstack;
 
     return 0;
 }

@@ -1,3 +1,4 @@
+#include <memory>
 #include "StackedBlock/StackedBlock.h"
 
 class Variable;
@@ -6,9 +7,9 @@ class NestedBlock;
 class SetVariable : public StackedBlock
 {
 public:
-    SetVariable(Variable& var,const NestedBlock& val);
+    SetVariable(std::shared_ptr<Variable> var,const std::shared_ptr<NestedBlock> val);
     void exec() const override;
 private:
-    Variable& variable;
-    const NestedBlock& value;
+    std::shared_ptr<Variable> variable;
+    const std::shared_ptr<NestedBlock> value;
 };
