@@ -6,8 +6,8 @@
 bool ComparisonLT::getBool() const
 {
     try {
-        return std::stod(left.getValue()) < std::stod(right.getValue());
+        return std::stod(left->getValue()) < std::stod(right->getValue());
     } catch (std::invalid_argument& e) {
-        return left.getValue() < right.getValue();
+        return left->getValue() < right->getValue();
     }
 }

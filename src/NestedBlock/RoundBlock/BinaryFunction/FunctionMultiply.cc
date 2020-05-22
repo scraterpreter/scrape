@@ -3,5 +3,5 @@
 
 std::string FunctionMultiply::getValue() const
 {
-    return std::to_string(left.getDouble()*right.getDouble());
+    return std::to_string(left->getDouble()*right->getDouble());
 }

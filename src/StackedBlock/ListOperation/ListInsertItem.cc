@@ -4,7 +4,7 @@
 #include "StackedBlock/ListOperation/ListInsertItem.h"
 #include "NestedBlock/RoundBlock/List/List.h"
 
-ListInsertItem::ListInsertItem(List& l,const std::shared_ptr<NestedBlock> i,
+ListInsertItem::ListInsertItem(const std::shared_ptr<List> l,const std::shared_ptr<NestedBlock> i,
     const std::shared_ptr<NestedBlock> val)
     : list(l),index(i),value(val){}
 

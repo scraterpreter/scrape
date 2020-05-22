@@ -3,5 +3,5 @@
 
 bool LogicalOr::getBool() const
 {
-    return left.getBool() || right.getBool();
+    return left->getBool() || right->getBool();
 }

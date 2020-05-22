@@ -1,9 +1,8 @@
 #include <string>
-#include <memory>
 #include "NestedBlock/RoundBlock/Constant.h"
 
 std::string Constant::getValue() const
 {
-    return *val.get();
+    return val;
 }
-Constant::Constant(std::shared_ptr<std::string> v) : val(v) {}
+Constant::Constant(std::string v) : val(v) {}

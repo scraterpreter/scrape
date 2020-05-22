@@ -1,10 +1,9 @@
 #include <string>
-#include <memory>
 #include "NestedBlock/RoundBlock/Variable.h"
 
 std::string Variable::getValue() const
 {
-    return *val.get();
+    return val;
 }
 
 void Variable::setValue(std::string v)
