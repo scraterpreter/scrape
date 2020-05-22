@@ -15,6 +15,7 @@
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionDivide.h"
 #include "NestedBlock/RoundBlock/Variable.h"
 #include "NestedBlock/RoundBlock/List/List.h"
+#include "NestedBlock/RoundBlock/List/ListLength.h"
 
 #include "NestedBlock/SharpBlock/BinaryLogical/LogicalAnd.h"
 #include "NestedBlock/SharpBlock/BinaryLogical/LogicalOr.h"
@@ -30,6 +31,11 @@
 #include "StackedBlock/Control/IfElseBlock.h"
 #include "StackedBlock/Control/RepeatUntilBlock.h"
 #include "StackedBlock/VariableOperation/SetVariable.h"
+#include "StackedBlock/ListOperation/ListAddItem.h"
+#include "StackedBlock/ListOperation/ListDeleteAll.h"
+#include "StackedBlock/ListOperation/ListDeleteItem.h"
+#include "StackedBlock/ListOperation/ListInsertItem.h"
+#include "StackedBlock/ListOperation/ListReplaceItem.h"
 
 using json = nlohmann::json;
 
@@ -85,6 +91,27 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
         std::shared_ptr<NestedBlock> val = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["VALUE"]));
         std::shared_ptr<Variable> var = std::static_pointer_cast<Variable>(resolveShadow(blocktable, fields["VARIABLE"]));
         b = std::make_shared<SetVariable>(var, val);
+    } else if (opcode == "data_addtolist") {
+        std::shared_ptr<List> list = std::static_pointer_cast<List>(resolveShadow(blocktable, fields["LIST"]));
+        std::shared_ptr<NestedBlock> item = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["ITEM"]));
+        b = std::make_shared<ListAddItem>(list, item);
+    } else if (opcode == "data_deleteoflist") {
+        std::shared_ptr<List> list = std::static_pointer_cast<List>(resolveShadow(blocktable, fields["LIST"]));
+        std::shared_ptr<NestedBlock> index = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["INDEX"]));
+        b = std::make_shared<ListDeleteItem>(list, index);
+    } else if (opcode == "data_insertatlist") {
+        std::shared_ptr<List> list = std::static_pointer_cast<List>(resolveShadow(blocktable, fields["LIST"]));
+        std::shared_ptr<NestedBlock> index = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["INDEX"]));
+        std::shared_ptr<NestedBlock> item = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["ITEM"]));
+        b = std::make_shared<ListInsertItem>(list, index, item);
+    } else if (opcode == "data_replaceitemoflist") {
+        std::shared_ptr<List> list = std::static_pointer_cast<List>(resolveShadow(blocktable, fields["LIST"]));
+        std::shared_ptr<NestedBlock> index = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["INDEX"]));
+        std::shared_ptr<NestedBlock> item = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["ITEM"]));
+        b = std::make_shared<ListReplaceItem>(list, index, item);
+    } else if (opcode == "data_lengthoflist") {
+        std::shared_ptr<List> list = std::static_pointer_cast<List>(resolveShadow(blocktable, fields["LIST"]));
+        b = std::make_shared<ListLength>(list);
     } else if (opcode == "looks_say") {
         std::shared_ptr<NestedBlock> msg = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["MESSAGE"]));
         b = std::make_shared<LooksSay>(msg);
