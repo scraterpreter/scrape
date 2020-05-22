@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     }
 
     for (auto& id:scrapejson["build_order"].items()) {
-        resolveBlock(scrapestate, scrapejson["blocks"], id.key());
+        resolveBlock(scrapestate, scrapejson["blocks"], id.value());
     }
 
     StackOfBlocks* mainstack = resolveStackOfBlocks(scrapestate, scrapejson["blocks"], scrapejson["start"].get<std::string>());

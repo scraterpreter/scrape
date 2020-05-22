@@ -3,7 +3,7 @@
 class StackOfBlocks;
 class SharpBlock;
 
-class RepeatUntilBlock : StackedBlock
+class RepeatUntilBlock : public StackedBlock
 {
 public:
     RepeatUntilBlock(const SharpBlock& cond,const StackOfBlocks& lb);

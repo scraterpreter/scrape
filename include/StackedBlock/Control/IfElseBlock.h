@@ -3,7 +3,7 @@
 class StackOfBlocks;
 class SharpBlock;
 
-class IfElseBlock : StackedBlock
+class IfElseBlock : public StackedBlock
 {
 public:
     IfElseBlock(const SharpBlock& cond,const StackOfBlocks& ib,

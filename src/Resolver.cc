@@ -70,65 +70,65 @@ Block* resolveBlock(BlockTable &blocktable, json blocks, std::string id) {
     if (opcode == "control_repeat_until") {
         SharpBlock *con = (SharpBlock*)(resolveShadow(blocktable, inputs["CONDITION"]));
         StackOfBlocks *stk = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK"][1].get<std::string>());
-        RepeatUntilBlock *b = new RepeatUntilBlock(*con, *stk);
+        b = new RepeatUntilBlock(*con, *stk);
     } else if (opcode == "control_if") {
         SharpBlock *con = (SharpBlock*)(resolveShadow(blocktable, inputs["CONDITION"]));
         StackOfBlocks *stk = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK"][1].get<std::string>());
-        IfBlock *b = new IfBlock(*con, *stk);
+        b = new IfBlock(*con, *stk);
     } else if (opcode == "control_if_else") {
         SharpBlock *con = (SharpBlock*)(resolveShadow(blocktable, inputs["CONDITION"]));
         StackOfBlocks *stk1 = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK"][1].get<std::string>());
         StackOfBlocks *stk2 = resolveStackOfBlocks(blocktable, blocks, inputs["SUBSTACK2"][1].get<std::string>());
-        IfElseBlock *b = new IfElseBlock(*con, *stk1, *stk2);
+        b = new IfElseBlock(*con, *stk1, *stk2);
     } else if (opcode == "data_setvariableto") {
         NestedBlock *val = (NestedBlock*)(resolveShadow(blocktable, inputs["VALUE"]));
         Variable *var = (Variable*)(resolveShadow(blocktable, fields["VARIABLE"]));
-        SetVariable *b = new SetVariable(*var, *val);
+        b = new SetVariable(*var, *val);
     } else if (opcode == "looks_say") {
         NestedBlock *msg = (NestedBlock*)(resolveShadow(blocktable, inputs["MESSAGE"]));
-        LooksSay *b = new LooksSay(*msg);
+        b = new LooksSay(*msg);
     } else if (opcode == "looks_think") {
         NestedBlock *msg = (NestedBlock*)(resolveShadow(blocktable, inputs["MESSAGE"]));
-        LooksThink *b = new LooksThink(*msg);
+        b = new LooksThink(*msg);
     } else if (opcode == "operator_add") {
         NestedBlock *num1 = (NestedBlock*)(resolveShadow(blocktable, inputs["NUM1"]));
         NestedBlock *num2 = (NestedBlock*)(resolveShadow(blocktable, inputs["NUM2"]));
-        FunctionAdd *b = new FunctionAdd(*num1, *num2);
+        b = new FunctionAdd(*num1, *num2);
     } else if (opcode == "operator_subtract") {
         NestedBlock *num1 = (NestedBlock*)(resolveShadow(blocktable, inputs["NUM1"]));
         NestedBlock *num2 = (NestedBlock*)(resolveShadow(blocktable, inputs["NUM2"]));
-        FunctionSubtract *b = new FunctionSubtract(*num1, *num2);
+        b = new FunctionSubtract(*num1, *num2);
     } else if (opcode == "operator_multiply") {
         NestedBlock *num1 = (NestedBlock*)resolveShadow(blocktable, inputs["NUM1"]);
         NestedBlock *num2 = (NestedBlock*)resolveShadow(blocktable, inputs["NUM2"]);
-        FunctionMultiply *b = new FunctionMultiply(*num1, *num2);
+        b = new FunctionMultiply(*num1, *num2);
     } else if (opcode == "operator_divide") {
         NestedBlock *num1 = (NestedBlock*)resolveShadow(blocktable, inputs["NUM1"]);
         NestedBlock *num2 = (NestedBlock*)resolveShadow(blocktable, inputs["NUM2"]);
-        FunctionDivide *b = new FunctionDivide(*num1, *num2);
+        b = new FunctionDivide(*num1, *num2);
     } else if (opcode == "operator_lt") {
         NestedBlock *opr1 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND1"]);
         NestedBlock *opr2 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND2"]);
-        ComparisonLT *b = new ComparisonLT(*opr1, *opr2);
+        b = new ComparisonLT(*opr1, *opr2);
     } else if (opcode == "operator_equals") {
         NestedBlock *opr1 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND1"]);
         NestedBlock *opr2 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND2"]);
-        ComparisonE *b = new ComparisonE(*opr1, *opr2);
+        b = new ComparisonE(*opr1, *opr2);
     } else if (opcode == "operator_gt") {
         NestedBlock *opr1 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND1"]);
         NestedBlock *opr2 = (NestedBlock*)resolveShadow(blocktable, inputs["OPERAND2"]);
-        ComparisonGT *b = new ComparisonGT(*opr1, *opr2);
+        b = new ComparisonGT(*opr1, *opr2);
     } else if (opcode == "operator_and") {
         SharpBlock *opr1 = (SharpBlock*)resolveShadow(blocktable, inputs["OPERAND1"]);
         SharpBlock *opr2 = (SharpBlock*)resolveShadow(blocktable, inputs["OPERAND2"]);
-        LogicalAnd *b = new LogicalAnd(*opr1, *opr2);
+        b = new LogicalAnd(*opr1, *opr2);
     } else if (opcode == "operator_or") {
         SharpBlock *opr1 = (SharpBlock*)resolveShadow(blocktable, inputs["OPERAND1"]);
         SharpBlock *opr2 = (SharpBlock*)resolveShadow(blocktable, inputs["OPERAND2"]);
-        LogicalOr *b = new LogicalOr(*opr1, *opr2);
+        b = new LogicalOr(*opr1, *opr2);
     } else if (opcode == "operator_not") {
         SharpBlock *opr = (SharpBlock*)resolveShadow(blocktable, inputs["OPERAND"]);
-        LogicalNot *b = new LogicalNot(*opr);
+        b = new LogicalNot(*opr);
     }
     blocktable.setIndex(intid, b);
     return b;
