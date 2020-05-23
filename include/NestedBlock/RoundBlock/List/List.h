@@ -4,6 +4,8 @@
 #include <vector>
 #include "NestedBlock/RoundBlock/RoundBlock.h"
 
+struct ListFindResult;
+
 class List : public RoundBlock
 {
 public:
@@ -17,8 +19,16 @@ public:
     void insert(int index, std::string v);
     void replace(int index, std::string v);
     int length() const;
+    ListFindResult find(std::string v);
+
     List(std::vector<std::string> v);
     List();
 private:
     std::vector<std::string> val;
+};
+
+struct ListFindResult
+{
+    bool itemFound;
+    int index;
 };

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <vector>
 #include <string>
 #include "NestedBlock/RoundBlock/List/List.h"
@@ -54,6 +55,24 @@ void List::replace(int index, std::string v)
 int List::length() const
 {
     return val.size();
+}
+
+ListFindResult List::find(std::string v)
+{
+    std::vector<std::string>::iterator it=std::find(val.begin(),
+        val.end(),v);
+    ListFindResult res;
+    if(it==val.end())
+    {
+        res.itemFound=false;
+        res.index=0x3f3f3f3f;
+    }
+    else
+    {
+        res.itemFound=true;
+        res.index=it-val.begin();
+    }
+    return res;
 }
 
 List::List(std::vector<std::string> v) : val(v) {}
