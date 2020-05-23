@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
     BlockTable scrapestate(scrapejson["ids"].get<int>()+1);
 
     for (auto& variable:scrapejson["container"]["variables"].items()) {
-        std::shared_ptr<Variable> v = std::make_shared<Variable>(std::to_string(scrapejson["container"]["variables"][variable.key()].get<int>()));
+        std::shared_ptr<Variable> v = std::make_shared<Variable>(scrapejson["container"]["variables"][variable.key()].get<std::string>());
         scrapestate.setIndex(std::stoi(variable.key()), v);
     }
 

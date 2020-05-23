@@ -5,10 +5,10 @@
 
 void StackOfBlocks::execAll() const
 {
-    for(std::shared_ptr<StackedBlock> b : blocks)
+    for(std::shared_ptr<StackedBlock> b : *blocks)
     {
         b->exec();
     }
 }
-StackOfBlocks::StackOfBlocks(const std::vector<std::shared_ptr<StackedBlock>>& b)
+StackOfBlocks::StackOfBlocks(const std::shared_ptr<std::vector<std::shared_ptr<StackedBlock>>> b)
     : blocks(b) {}

@@ -8,8 +8,8 @@ class StackOfBlocks
 {
 public:
   void execAll() const;
-  StackOfBlocks(const std::vector<std::shared_ptr<StackedBlock>>& b);
+  StackOfBlocks(const std::shared_ptr<std::vector<std::shared_ptr<StackedBlock>>> b);
 private:
-  std::vector<std::shared_ptr<StackedBlock>> blocks; 
+  std::shared_ptr<std::vector<std::shared_ptr<StackedBlock>>> blocks; 
     // vector of StackedBlock pointers
 };
