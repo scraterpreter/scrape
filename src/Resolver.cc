@@ -14,10 +14,12 @@
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionSubtract.h"
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionMultiply.h"
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionDivide.h"
-#include "NestedBlock/RoundBlock/RandomBlock.h"
-#include "NestedBlock/RoundBlock/JoinBlock.h"
-#include "NestedBlock/RoundBlock/LetterOfBlock.h"
-#include "NestedBlock/RoundBlock/LengthBlock.h"
+#include "NestedBlock/RoundBlock/Operators/OperatorsRandom.h"
+#include "NestedBlock/RoundBlock/Operators/OperatorsJoin.h"
+#include "NestedBlock/RoundBlock/Operators/OperatorsLetterOf.h"
+#include "NestedBlock/RoundBlock/Operators/OperatorsLength.h"
+#include "NestedBlock/RoundBlock/Operators/OperatorsMod.h"
+#include "NestedBlock/RoundBlock/Operators/OperatorsRound.h"
 
 #include "NestedBlock/RoundBlock/Variable.h"
 #include "NestedBlock/RoundBlock/List/List.h"
@@ -32,6 +34,7 @@
 #include "NestedBlock/SharpBlock/BinaryComparison/ComparisonLT.h"
 #include "NestedBlock/SharpBlock/BinaryComparison/ComparisonGT.h"
 #include "NestedBlock/SharpBlock/ListContainsItem.h"
+#include "NestedBlock/SharpBlock/OperatorsContains.h"
 
 #include "StackedBlock/Looks/LooksSay.h"
 #include "StackedBlock/Looks/LooksThink.h"
@@ -202,18 +205,29 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
     } else if (opcode == "operator_random") {
         std::shared_ptr<NestedBlock> lb = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["FROM"]));
         std::shared_ptr<NestedBlock> ub = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["TO"]));
-        b = std::make_shared<RandomBlock>(lb, ub);
+        b = std::make_shared<OperatorsRandom>(lb, ub);
     } else if (opcode == "operator_join") {
         std::shared_ptr<NestedBlock> lb = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["STRING1"]));
         std::shared_ptr<NestedBlock> rb = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["STRING2"]));
-        b = std::make_shared<JoinBlock>(lb, rb);
+        b = std::make_shared<OperatorsJoin>(lb, rb);
     } else if (opcode == "operator_letter_of") {
         std::shared_ptr<NestedBlock> i = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["LETTER"]));
         std::shared_ptr<NestedBlock> s = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["STRING"]));
-        b = std::make_shared<LetterOfBlock>(i, s);
+        b = std::make_shared<OperatorsLetterOf>(i, s);
     } else if (opcode == "operator_length") {
         std::shared_ptr<NestedBlock> s = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["STRING"]));
-        b = std::make_shared<LengthBlock>(s);
+        b = std::make_shared<OperatorsLength>(s);
+    } else if (opcode == "operator_contains") {
+        std::shared_ptr<NestedBlock> s1 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["STRING1"]));
+        std::shared_ptr<NestedBlock> s2 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["STRING2"]));
+        b = std::make_shared<OperatorsContains>(s1, s2);
+    } else if (opcode == "operator_mod") {
+        std::shared_ptr<NestedBlock> n1 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM1"]));
+        std::shared_ptr<NestedBlock> n2 = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM2"]));
+        b = std::make_shared<OperatorsMod>(n1, n2);
+    } else if (opcode == "operator_round") {
+        std::shared_ptr<NestedBlock> n = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM"]));
+        b = std::make_shared<OperatorsRound>(n);
     } else {
         std::cerr << "Warning: Unsupported block " << opcode << ".\n";
     }

@@ -5,11 +5,11 @@
 #include "NestedBlock/NestedBlock.h"
 #include "NestedBlock/RoundBlock/RoundBlock.h"
 
-class LengthBlock : public RoundBlock
+class OperatorsRound : public RoundBlock
 {
 public:
     std::string getValue() const override;
-    LengthBlock(std::shared_ptr<NestedBlock> s);
+    OperatorsRound(std::shared_ptr<NestedBlock> n);
 private:
-    std::shared_ptr<NestedBlock> str;
+    std::shared_ptr<NestedBlock> num;
 };
