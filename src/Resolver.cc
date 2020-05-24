@@ -15,6 +15,9 @@
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionMultiply.h"
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionDivide.h"
 #include "NestedBlock/RoundBlock/RandomBlock.h"
+#include "NestedBlock/RoundBlock/JoinBlock.h"
+#include "NestedBlock/RoundBlock/LetterOfBlock.h"
+#include "NestedBlock/RoundBlock/LengthBlock.h"
 
 #include "NestedBlock/RoundBlock/Variable.h"
 #include "NestedBlock/RoundBlock/List/List.h"
@@ -198,8 +201,19 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
         b = std::make_shared<LogicalNot>(opr);
     } else if (opcode == "operator_random") {
         std::shared_ptr<NestedBlock> lb = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["FROM"]));
-        std::shared_ptr<NestedBlock> rb = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["TO"]));
-        b = std::make_shared<RandomBlock>(lb, rb);
+        std::shared_ptr<NestedBlock> ub = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["TO"]));
+        b = std::make_shared<RandomBlock>(lb, ub);
+    } else if (opcode == "operator_join") {
+        std::shared_ptr<NestedBlock> lb = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["STRING1"]));
+        std::shared_ptr<NestedBlock> rb = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["STRING2"]));
+        b = std::make_shared<JoinBlock>(lb, rb);
+    } else if (opcode == "operator_letter_of") {
+        std::shared_ptr<NestedBlock> i = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["LETTER"]));
+        std::shared_ptr<NestedBlock> s = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["STRING"]));
+        b = std::make_shared<LetterOfBlock>(i, s);
+    } else if (opcode == "operator_length") {
+        std::shared_ptr<NestedBlock> s = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["STRING"]));
+        b = std::make_shared<LengthBlock>(s);
     } else {
         std::cerr << "Warning: Unsupported block " << opcode << ".\n";
     }
