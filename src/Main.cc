@@ -5,6 +5,8 @@
 #include <string>
 #include <map>
 #include <memory>
+#include <stdlib.h>
+#include <time.h>
 
 #include "StackOfBlocks.h"
 #include "BlockTable.h"
@@ -19,6 +21,8 @@ std::shared_ptr<Block> resolveShadow(BlockTable &blocktable, json shadow);
 std::shared_ptr<StackOfBlocks> resolveStackOfBlocks(BlockTable &blocktable, json blocks, std::string start);
 
 int main(int argc, char* argv[]) {
+    srand(time(0));
+
     if (argc < 2) {
         std::cerr << "Please specify the name of the .scrape file.\n";
         return 1;

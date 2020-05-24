@@ -6,6 +6,7 @@
 
 #include "Block.h"
 #include "BlockTable.h"
+#include "StackOfBlocks.h"
 
 #include "NestedBlock/RoundBlock/Constant.h"
 #include "NestedBlock/RoundBlock/RoundBlock.h"
@@ -13,6 +14,8 @@
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionSubtract.h"
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionMultiply.h"
 #include "NestedBlock/RoundBlock/BinaryFunction/FunctionDivide.h"
+#include "NestedBlock/RoundBlock/RandomBlock.h"
+
 #include "NestedBlock/RoundBlock/Variable.h"
 #include "NestedBlock/RoundBlock/List/List.h"
 #include "NestedBlock/RoundBlock/List/ListLength.h"
@@ -25,10 +28,10 @@
 #include "NestedBlock/SharpBlock/BinaryComparison/ComparisonE.h"
 #include "NestedBlock/SharpBlock/BinaryComparison/ComparisonLT.h"
 #include "NestedBlock/SharpBlock/BinaryComparison/ComparisonGT.h"
+#include "NestedBlock/SharpBlock/ListContainsItem.h"
 
 #include "StackedBlock/Looks/LooksSay.h"
 #include "StackedBlock/Looks/LooksThink.h"
-#include "StackOfBlocks.h"
 #include "StackedBlock/Control/ForeverBlock.h"
 #include "StackedBlock/Control/IfBlock.h"
 #include "StackedBlock/Control/IfElseBlock.h"
@@ -144,6 +147,10 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
     } else if (opcode == "data_lengthoflist") {
         std::shared_ptr<List> list = std::static_pointer_cast<List>(resolveShadow(blocktable, fields["LIST"]));
         b = std::make_shared<ListLength>(list);
+    } else if (opcode == "data_listcontainsitem") {
+        std::shared_ptr<List> list = std::static_pointer_cast<List>(resolveShadow(blocktable, fields["LIST"]));
+        std::shared_ptr<NestedBlock> item = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["ITEM"]));
+        b = std::make_shared<ListContainsItem>(list, item);
     } else if (opcode == "looks_say") {
         std::shared_ptr<NestedBlock> msg = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["MESSAGE"]));
         b = std::make_shared<LooksSay>(msg);
@@ -189,6 +196,10 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
     } else if (opcode == "operator_not") {
         std::shared_ptr<SharpBlock> opr = std::static_pointer_cast<SharpBlock>(resolveShadow(blocktable, inputs["OPERAND"]));
         b = std::make_shared<LogicalNot>(opr);
+    } else if (opcode == "operator_random") {
+        std::shared_ptr<NestedBlock> lb = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["FROM"]));
+        std::shared_ptr<NestedBlock> rb = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["TO"]));
+        b = std::make_shared<RandomBlock>(lb, rb);
     } else {
         std::cerr << "Warning: Unsupported block " << opcode << ".\n";
     }
