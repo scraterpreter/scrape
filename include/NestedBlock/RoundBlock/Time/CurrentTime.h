@@ -1,11 +1,13 @@
 #include <string>
+#include <memory>
+#include "NestedBlock/RoundBlock/Constant.h"
 #include "NestedBlock/RoundBlock/RoundBlock.h"
 
 class CurrentTime : public RoundBlock
 {
 public:
-    CurrentTime(std::string opt);
+    CurrentTime(std::shared_ptr<Constant> opt);
     std::string getValue() const override;
 private:
-    std::string option;
+    std::shared_ptr<Constant> option;
 };

@@ -28,6 +28,9 @@
 #include "NestedBlock/RoundBlock/List/ListFindItem.h"
 #include "NestedBlock/RoundBlock/List/ListGetItem.h"
 
+#include "NestedBlock/RoundBlock/Time/CurrentTime.h"
+#include "NestedBlock/RoundBlock/Time/DaysSince2000.h"
+
 #include "NestedBlock/SharpBlock/BinaryLogical/LogicalAnd.h"
 #include "NestedBlock/SharpBlock/BinaryLogical/LogicalOr.h"
 #include "NestedBlock/SharpBlock/LogicalNot.h"
@@ -233,6 +236,11 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
         std::shared_ptr<Constant> o = std::static_pointer_cast<Constant>(resolveShadow(blocktable, fields["OPERATOR"]));
         std::shared_ptr<NestedBlock> n = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM"]));
         b = std::make_shared<OperatorsMathOp>(o, n);
+    } else if (opcode == "sensing_current") {
+        std::shared_ptr<Constant> m = std::static_pointer_cast<Constant>(resolveShadow(blocktable, fields["CURRENTMENU"]));
+        b = std::make_shared<CurrentTime>(m);
+    } else if (opcode == "sensing_dayssince2000") {
+        b = std::make_shared<DaysSince2000>();
     } else {
         std::cerr << "Warning: Unsupported block " << opcode << ".\n";
     }

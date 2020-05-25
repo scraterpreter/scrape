@@ -1,9 +1,10 @@
 #include "NestedBlock/RoundBlock/Time/CurrentTime.h"
 #include <string.h>
+#include <memory>
 #include <time.h>
 #include <stdio.h>
 
-CurrentTime::CurrentTime(std::string opt) : option(opt){}
+CurrentTime::CurrentTime(std::shared_ptr<Constant> opt) : option(opt){}
 
 std::string CurrentTime::getValue() const
 {
@@ -13,34 +14,34 @@ std::string CurrentTime::getValue() const
     char timeString[50];
     char timeFormatString[10];
 
-    if(option=="YEAR")
+    if(option->getValue()=="YEAR")
     {
         strcpy(timeFormatString,"%Y");
     }
-    else if(option=="MONTH")
+    else if(option->getValue()=="MONTH")
     {
         strcpy(timeFormatString,"%m");
     }
-    else if(option=="DATE")
+    else if(option->getValue()=="DATE")
     {
         strcpy(timeFormatString,"%d");
     }
-    else if(option=="DAYOFWEEK")
+    else if(option->getValue()=="DAYOFWEEK")
     {
         char tmpTimeString[50];
         strftime(tmpTimeString,sizeof(tmpTimeString),"%w",&currentTimeInfo);
         int zeroIndexedWeekday=atoi(tmpTimeString); // 0-6 with Sunday as 0, Monday as 1, etc
         sprintf(timeFormatString,"%d",zeroIndexedWeekday+1);
     }
-    else if(option=="HOUR")
+    else if(option->getValue()=="HOUR")
     {
         strcpy(timeFormatString,"%H");
     }
-    else if(option=="MINUTE")
+    else if(option->getValue()=="MINUTE")
     {
         strcpy(timeFormatString,"%M");
     }
-    else if(option=="SECOND")
+    else if(option->getValue()=="SECOND")
     {
         strcpy(timeFormatString,"%S");
     }
