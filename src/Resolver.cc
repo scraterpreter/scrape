@@ -20,6 +20,7 @@
 #include "NestedBlock/RoundBlock/Operators/OperatorsLength.h"
 #include "NestedBlock/RoundBlock/Operators/OperatorsMod.h"
 #include "NestedBlock/RoundBlock/Operators/OperatorsRound.h"
+#include "NestedBlock/RoundBlock/Operators/OperatorsMathOp.h"
 
 #include "NestedBlock/RoundBlock/Variable.h"
 #include "NestedBlock/RoundBlock/List/List.h"
@@ -228,6 +229,10 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
     } else if (opcode == "operator_round") {
         std::shared_ptr<NestedBlock> n = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM"]));
         b = std::make_shared<OperatorsRound>(n);
+    } else if (opcode == "operator_mathop") {
+        std::shared_ptr<Constant> o = std::static_pointer_cast<Constant>(resolveShadow(blocktable, fields["OPERATOR"]));
+        std::shared_ptr<NestedBlock> n = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["NUM"]));
+        b = std::make_shared<OperatorsMathOp>(o, n);
     } else {
         std::cerr << "Warning: Unsupported block " << opcode << ".\n";
     }
