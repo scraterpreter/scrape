@@ -22,6 +22,7 @@
 #include "NestedBlock/RoundBlock/Operators/OperatorsRound.h"
 #include "NestedBlock/RoundBlock/Operators/OperatorsMathOp.h"
 
+#include "NestedBlock/RoundBlock/AnswerBlock.h"
 #include "NestedBlock/RoundBlock/Variable.h"
 #include "NestedBlock/RoundBlock/List/List.h"
 #include "NestedBlock/RoundBlock/List/ListLength.h"
@@ -56,6 +57,7 @@
 #include "StackedBlock/ListOperation/ListDeleteItem.h"
 #include "StackedBlock/ListOperation/ListInsertItem.h"
 #include "StackedBlock/ListOperation/ListReplaceItem.h"
+#include "StackedBlock/Ask/AskAndWait.h"
 
 using json = nlohmann::json;
 
@@ -79,6 +81,11 @@ std::shared_ptr<StackOfBlocks> resolveStackOfBlocks(BlockTable &blocktable, json
     }
     std::shared_ptr<StackOfBlocks> stack = std::make_shared<StackOfBlocks>(stackvector);
     return stack;
+}
+
+std::shared_ptr<Variable> resolveAnswerVariable(BlockTable &blocktable)
+{
+    return std::static_pointer_cast<Variable>(blocktable.getIndex(blocktable.size()-2));
 }
 
 std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::string id) {
@@ -241,6 +248,11 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
         b = std::make_shared<CurrentTime>(m);
     } else if (opcode == "sensing_dayssince2000") {
         b = std::make_shared<DaysSince2000>();
+    } else if (opcode == "sensing_answer") {
+        b = std::make_shared<AnswerBlock>(resolveAnswerVariable(blocktable));
+    } else if (opcode == "sensing_askandwait") {
+        std::shared_ptr<NestedBlock> question = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["QUESTION"]));
+        b = std::make_shared<AskAndWait>(question,resolveAnswerVariable(blocktable));
     } else {
         std::cerr << "Warning: Unsupported block " << opcode << ".\n";
     }

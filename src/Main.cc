@@ -40,7 +40,9 @@ int main(int argc, char* argv[]) {
     json scrapejson;
     scrapefile >> scrapejson;
 
-    BlockTable scrapestate(scrapejson["ids"].get<int>()+1);
+    BlockTable scrapestate(scrapejson["ids"].get<int>()+2);
+    
+    scrapestate.setIndex(scrapestate.size()-2,std::make_shared<Variable>()); // Answer Variable
 
     for (auto& variable:scrapejson["container"]["variables"].items()) {
         std::shared_ptr<Variable> v = std::make_shared<Variable>(scrapejson["container"]["variables"][variable.key()].get<std::string>());
@@ -55,7 +57,7 @@ int main(int argc, char* argv[]) {
     for (auto& id:scrapejson["build_order"].items()) {
         resolveBlock(scrapestate, scrapejson["blocks"], id.value());
     }
-
+    
     std::shared_ptr<StackOfBlocks> mainstack = resolveStackOfBlocks(scrapestate, scrapejson["blocks"], scrapejson["start"].get<std::string>());
 
     mainstack->execAll();
