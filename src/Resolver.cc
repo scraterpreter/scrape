@@ -265,6 +265,8 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
         b = std::make_shared<TimerBlock>(resolveGlobalTimer(blocktable));
     } else if (opcode == "sensing_resettimer") {
         b = std::make_shared<ResetTimer>(resolveGlobalTimer(blocktable));
+    } else if (opcode == "sensing_username") {
+        b = std::make_shared<Constant>("<username>");
     } else {
         std::cerr << "Warning: Unsupported block " << opcode << ".\n";
     }
