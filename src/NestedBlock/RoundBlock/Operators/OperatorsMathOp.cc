@@ -4,6 +4,8 @@
 #include "NestedBlock/RoundBlock/Constant.h"
 #include "NestedBlock/RoundBlock/Operators/OperatorsMathOp.h"
 
+#define RAD 57.29577951308232d
+
 std::string OperatorsMathOp::getValue() const
 {
     double inp = num->getDouble();
@@ -17,17 +19,17 @@ std::string OperatorsMathOp::getValue() const
     } else if (op->getValue() == "sqrt") {
         ans = sqrt(inp);
     } else if (op->getValue() == "sin") {
-        ans = sin(inp);
+        ans = sin(inp/RAD);
     } else if (op->getValue() == "cos") {
-        ans = cos(inp);
+        ans = cos(inp/RAD);
     } else if (op->getValue() == "tan") {
-        ans = tan(inp);
+        ans = tan(inp/RAD);
     } else if (op->getValue() == "asin") {
-        ans = asin(inp);
+        ans = asin(inp)*RAD;
     } else if (op->getValue() == "acos") {
-        ans = acos(inp);
+        ans = acos(inp)*RAD;
     } else if (op->getValue() == "atan") {
-        ans = atan(inp);
+        ans = atan(inp)*RAD;
     } else if (op->getValue() == "ln") {
         ans = log(inp);
     } else if (op->getValue() == "log") {
