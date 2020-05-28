@@ -14,6 +14,7 @@
 #include "NestedBlock/RoundBlock/List/List.h"
 #include "NestedBlock/RoundBlock/List/ListLength.h"
 #include "GlobalTimer.h"
+#include "StackedBlock/Control/StopBlock.h"
 
 using json = nlohmann::json;
 
@@ -61,8 +62,12 @@ int main(int argc, char* argv[]) {
     }
     
     std::shared_ptr<StackOfBlocks> mainstack = resolveStackOfBlocks(scrapestate, scrapejson["blocks"], scrapejson["start"].get<std::string>());
-
-    mainstack->execAll();
+    
+    try
+    {
+        mainstack->execAll();
+    }
+    catch(StopBlockCalledException& e) {}
 
     return 0;
 }

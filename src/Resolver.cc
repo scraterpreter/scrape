@@ -61,6 +61,7 @@
 #include "StackedBlock/ListOperation/ListReplaceItem.h"
 #include "StackedBlock/Ask/AskAndWait.h"
 #include "StackedBlock/ResetTimer.h"
+#include "StackedBlock/Control/StopBlock.h"
 
 using json = nlohmann::json;
 
@@ -267,6 +268,9 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
         b = std::make_shared<ResetTimer>(resolveGlobalTimer(blocktable));
     } else if (opcode == "sensing_username") {
         b = std::make_shared<Constant>("<username>");
+    } else if (opcode == "control_stop") {
+        std::shared_ptr<Constant> opt = std::static_pointer_cast<Constant>(resolveShadow(blocktable, fields["STOP_OPTION"]));
+        b = std::make_shared<StopBlock>(opt);
     } else {
         std::cerr << "Warning: Unsupported block " << opcode << ".\n";
     }
