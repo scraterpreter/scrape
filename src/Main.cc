@@ -13,6 +13,7 @@
 #include "NestedBlock/RoundBlock/Variable.h"
 #include "NestedBlock/RoundBlock/List/List.h"
 #include "NestedBlock/RoundBlock/List/ListLength.h"
+#include "GlobalTimer.h"
 
 using json = nlohmann::json;
 
@@ -43,7 +44,8 @@ int main(int argc, char* argv[]) {
     BlockTable scrapestate(scrapejson["ids"].get<int>()+2);
     
     scrapestate.setIndex(scrapestate.size()-2,std::make_shared<Variable>()); // Answer Variable
-
+    scrapestate.setIndex(scrapestate.size()-1,std::make_shared<GlobalTimer>()); // Global Timer 
+    
     for (auto& variable:scrapejson["container"]["variables"].items()) {
         std::shared_ptr<Variable> v = std::make_shared<Variable>(scrapejson["container"]["variables"][variable.key()].get<std::string>());
         scrapestate.setIndex(std::stoi(variable.key()), v);

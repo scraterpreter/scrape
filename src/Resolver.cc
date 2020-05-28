@@ -7,6 +7,7 @@
 #include "Block.h"
 #include "BlockTable.h"
 #include "StackOfBlocks.h"
+#include "GlobalTimer.h"
 
 #include "NestedBlock/RoundBlock/Constant.h"
 #include "NestedBlock/RoundBlock/RoundBlock.h"
@@ -31,6 +32,7 @@
 
 #include "NestedBlock/RoundBlock/Time/CurrentTime.h"
 #include "NestedBlock/RoundBlock/Time/DaysSince2000.h"
+#include "NestedBlock/RoundBlock/Time/TimerBlock.h"
 
 #include "NestedBlock/SharpBlock/BinaryLogical/LogicalAnd.h"
 #include "NestedBlock/SharpBlock/BinaryLogical/LogicalOr.h"
@@ -58,6 +60,7 @@
 #include "StackedBlock/ListOperation/ListInsertItem.h"
 #include "StackedBlock/ListOperation/ListReplaceItem.h"
 #include "StackedBlock/Ask/AskAndWait.h"
+#include "StackedBlock/ResetTimer.h"
 
 using json = nlohmann::json;
 
@@ -86,6 +89,11 @@ std::shared_ptr<StackOfBlocks> resolveStackOfBlocks(BlockTable &blocktable, json
 std::shared_ptr<Variable> resolveAnswerVariable(BlockTable &blocktable)
 {
     return std::static_pointer_cast<Variable>(blocktable.getIndex(blocktable.size()-2));
+}
+
+std::shared_ptr<GlobalTimer> resolveGlobalTimer(BlockTable &blocktable)
+{
+    return std::static_pointer_cast<GlobalTimer>(blocktable.getIndex(blocktable.size()-1));
 }
 
 std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::string id) {
@@ -253,6 +261,10 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
     } else if (opcode == "sensing_askandwait") {
         std::shared_ptr<NestedBlock> question = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["QUESTION"]));
         b = std::make_shared<AskAndWait>(question,resolveAnswerVariable(blocktable));
+    } else if (opcode == "sensing_timer") {
+        b = std::make_shared<TimerBlock>(resolveGlobalTimer(blocktable));
+    } else if (opcode == "sensing_resettimer") {
+        b = std::make_shared<ResetTimer>(resolveGlobalTimer(blocktable));
     } else {
         std::cerr << "Warning: Unsupported block " << opcode << ".\n";
     }
