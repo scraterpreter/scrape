@@ -23,3 +23,5 @@ target_include_directories(scrape
     PRIVATE 
         ${PROJECT_SOURCE_DIR}/include
 )
+
+install(TARGETS scrape DESTINATION bin)
