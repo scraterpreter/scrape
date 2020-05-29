@@ -1,0 +1,31 @@
+name: scraterpreter
+version: git
+license: MIT
+grade: stable
+summary: scraterpreter
+description: |
+    Scrape is a program that runs Scratch programs.
+    Use scrapec to compile .sb3 files
+    to .scrape files, then use scrape to run .scrape files.
+confinement: strict
+base: core18
+parts:
+  scrape:
+    plugin: cmake
+    source: .
+    build-packages:
+    - g++
+    - make
+  scrapec:
+    plugin: python
+    source: https://github.com/scraterpreter/scrapec.git
+    
+apps:
+  scrape:
+    command: bin/scrape
+    plugs:
+      - home
+  scrapec:
+    command: bin/scrapec
+    plugs:
+      - home
