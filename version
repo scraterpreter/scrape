@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+import subprocess
+from datetime import datetime,timezone
+import copy
+import sys
+
+def run_command(command):
+    process = subprocess.run(command, stdout=subprocess.PIPE, universal_newlines=True)
+    return process.stdout.strip("\n")
+
+version = run_command(["git", "describe", "--always"])
+
+now_utc = datetime.now(timezone.utc)
+
+y0 = now_utc.year//100
+mm = now_utc.month
+
+cur_version = "{0}.{1}".format(str(y0), str(mm))
+
+new_version = None
+
+if "." in version:
+    new_version = [int(i) for i in version.split(".")]
+    if new_version[0] == y0 and new_version[1] == mm:
+        new_version[2] += 1
+
+if new_version == None:
+    new_version = [y0, mm, 0]
+
+final_version = ".".join(["{:02d}".format(i) for i in new_version[:2]] + [str(new_version[2])])
+print(final_version)
+
+if len(sys.argv) != 1:
+    msg = '"' + " ".join(sys.argv[1:]) + '"'
+    run_command(["git", "tag", "-a", final_version, "-m", msg])
