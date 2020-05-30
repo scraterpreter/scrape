@@ -1,5 +1,12 @@
 **scrape**: the **SCRA**tch inter**P**r**E**ter
 
+[![Scrape Banner](https://cdn.paullee.dev/scrape/banner.png)](https://cdn.paullee.dev/scrape/dash.jpg)
+
+Scrape is an interpreter to run Scratch projects.
+First compile .sb3 files into .scrape files using [Scrapec](https://github.com/scraterpreter/scrapec), then run .scrape files using Scrape.
+
+See [COMPATIBILITY.md](COMPATIBILITY.md) for information on compatibility with Scratch.
+
 ## Installation and Usage
 ### Snap
 Scrape Snaps are available for installation at the Snap Store.
