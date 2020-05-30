@@ -152,6 +152,9 @@ std::shared_ptr<Block> resolveBlock(BlockTable &blocktable, json blocks, std::st
         std::shared_ptr<List> list = std::static_pointer_cast<List>(resolveShadow(blocktable, fields["LIST"]));
         std::shared_ptr<NestedBlock> index = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["INDEX"]));
         b = std::make_shared<ListDeleteItem>(list, index);
+    } else if (opcode == "data_deletealloflist") {
+        std::shared_ptr<List> list = std::static_pointer_cast<List>(resolveShadow(blocktable, fields["LIST"]));
+        b = std::make_shared<ListDeleteAll>(list);
     } else if (opcode == "data_insertatlist") {
         std::shared_ptr<List> list = std::static_pointer_cast<List>(resolveShadow(blocktable, fields["LIST"]));
         std::shared_ptr<NestedBlock> index = std::static_pointer_cast<NestedBlock>(resolveShadow(blocktable, inputs["INDEX"]));
