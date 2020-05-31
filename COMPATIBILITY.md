@@ -28,8 +28,10 @@ Scrape stores all integers as a C++ double.
 - data_insertatlist
 - data_replaceitemoflist
 - data_itemoflist
+    - This block can fit inside parameters where a boolean block is expected in Scratch. This behavior is currently unsupported in Scrape.
 - data_itemnumoflist
     - Unlike Scratch, in Scrape this block is case-sensitive.
+    - This block can fit inside parameters where a boolean block is expected in Scratch. This behavior is currently unsupported in Scrape.
 - data_lengthoflist
 - data_listcontainsitem
 - event_whenflagclicked

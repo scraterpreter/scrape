@@ -7,6 +7,8 @@ First compile .sb3 files into .scrape files using [Scrapec](https://github.com/s
 
 Click [here](https://vimeo.com/424433102) to view a demo.
 
+Join our [Discord Server](https://discord.gg/3zV37x4) for support!
+
 See [COMPATIBILITY.md](COMPATIBILITY.md) for information on compatibility with Scratch.
 
 ## Installation and Usage
