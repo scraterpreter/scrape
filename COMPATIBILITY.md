@@ -2,7 +2,9 @@
 
 Unlike Scratch multi-threading is not supported in Scrape (yet!).
 
-Scrape requires all blocks to have their parameters supplied.
+Scrape requires all blocks to be located under the sprite "Sprite1" and all variables to be global.
+
+All blocks must have their parameters supplied.
 
 Custom blocks are being worked on at this time.
 

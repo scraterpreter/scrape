@@ -5,6 +5,8 @@
 Scrape is an interpreter to run Scratch projects.
 First compile .sb3 files into .scrape files using [Scrapec](https://github.com/scraterpreter/scrapec), then run .scrape files using Scrape.
 
+Click [here](https://vimeo.com/424433102) to view a demo.
+
 See [COMPATIBILITY.md](COMPATIBILITY.md) for information on compatibility with Scratch.
 
 ## Installation and Usage

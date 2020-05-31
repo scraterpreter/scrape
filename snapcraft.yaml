@@ -2,11 +2,10 @@ name: scraterpreter
 version: git
 license: MIT
 grade: stable
-summary: scraterpreter
+summary: Interpreter that runs .sb3 (Scratch) projects.
 description: |
     Scrape is a program that runs Scratch programs.
-    Use scrapec to compile .sb3 files
-    to .scrape files, then use scrape to run .scrape files.
+    Use scrapec to compile .sb3 files to .scrape files, then use scrape to run .scrape files.
 confinement: strict
 base: core18
 parts:
