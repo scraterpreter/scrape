@@ -4,7 +4,10 @@
 #include "NestedBlock/RoundBlock/Constant.h"
 #include "NestedBlock/RoundBlock/Operators/OperatorsMathOp.h"
 
-#define RAD 57.29577951308232d
+namespace
+{
+    const double RAD = 57.29577951308232;
+}
 
 std::string OperatorsMathOp::getValue() const
 {
