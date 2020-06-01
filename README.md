@@ -12,13 +12,21 @@ Join our [Discord Server](https://discord.gg/3zV37x4) for support!
 See [COMPATIBILITY.md](COMPATIBILITY.md) for information on compatibility with Scratch.
 
 ## Installation and Usage
-### Snap
+### Linux (Snap)
 Scrape Snaps are available for installation at the Snap Store.
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/scraterpreter)
+
 ```bash
 sudo snap install scraterpreter # install scrape
 scraterpreter.scrapec project.sb3 # compile the .sb3 file into a .scrape file
 scraterpreter.scrape project.scrape # run the .scrape file
 ```
+
+### Windows (MSI and PIP)
+Scrape is available as an MSI on our [releases page](https://github.com/scraterpreter/scrape/releases).
+Scrapec is available as [a PIP package on the PYPI](https://pypi.org/project/scrapec/).
+There may be some issues with PATH on Windows. Please contact us by creating [a GitHub issue](https://github.com/scraterpreter/scrape/issues/new) or by joining our [Discord Server](https://discord.gg/3zV37x4).
 
 ### Binary
 If you follow the instructions listed below to build scrape, and instructions listed [here](https://github.com/scraterpreter/scrapec/blob/master/README.md) to compile scrapec, these commands should be used to run scrape.
