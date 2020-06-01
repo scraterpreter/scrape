@@ -9,7 +9,7 @@ def run_command(command):
     process = subprocess.run(command, stdout=subprocess.PIPE, universal_newlines=True)
     return process.stdout.strip("\n")
 
-version = run_command(["git", "describe", "--always"])
+version = run_command(["git", "describe", "--always", "--abbrev=0"])
 
 now_utc = datetime.now(timezone.utc)
 
