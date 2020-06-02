@@ -32,5 +32,5 @@ final_version = ".".join(["{:02d}".format(i) for i in new_version[:2]] + [str(ne
 print(final_version)
 
 if len(sys.argv) != 1:
-    msg = '"' + " ".join(sys.argv[1:]) + '"'
+    msg = sys.argv[1]
     run_command(["git", "tag", "-a", final_version, "-m", msg])
