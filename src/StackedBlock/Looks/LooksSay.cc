@@ -7,7 +7,7 @@
 
 void LooksSay::exec() const
 {
-    if (std::regex_match (val->getValue(), std::regex("(\\d*)\\.?(\\d*)"))) {
+    if (std::regex_match (val->getValue(), std::regex("(\\d+)\\.?(\\d*)"))) {
         std::cout << std::stod(val->getValue()) << '\n';
     } else {
         std::cout << val->getValue() << '\n';
