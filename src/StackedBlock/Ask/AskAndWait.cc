@@ -12,6 +12,17 @@ void AskAndWait::exec() const
 {
     std::string answer;
     std::cout<<question->getValue();
-    std::getline(std::cin,answer);
-    answerVariable->setValue(answer);
+    if(std::getline(std::cin,answer))
+    {
+        answerVariable->setValue(answer);
+    }
+    else
+    {
+        throw StandardInputException();        
+    }
+}
+
+const char *  StandardInputException::what() const noexcept
+{
+    return "No more input to read!";
 }

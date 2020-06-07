@@ -14,3 +14,8 @@ private:
     std::shared_ptr<NestedBlock> question;
     std::shared_ptr<Variable> answerVariable;
 };
+
+class StandardInputException : public std::exception
+{
+    const char *  what() const noexcept override;
+};
