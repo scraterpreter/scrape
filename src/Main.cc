@@ -15,6 +15,7 @@
 #include "NestedBlock/RoundBlock/List/ListLength.h"
 #include "GlobalTimer.h"
 #include "StackedBlock/Control/StopBlock.h"
+#include "StackedBlock/Ask/AskAndWait.h"
 
 using json = nlohmann::json;
 
@@ -68,6 +69,7 @@ int main(int argc, char* argv[]) {
         mainstack->execAll();
     }
     catch(StopBlockCalledException& e) {}
+    catch(StandardInputException& e) {}
 
     return 0;
 }
