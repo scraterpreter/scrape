@@ -12,6 +12,23 @@ Join our [Discord Server](https://discord.gg/3zV37x4) for support!
 See [COMPATIBILITY.md](COMPATIBILITY.md) for information on compatibility with Scratch.
 
 ## Installation and Usage
+### Linux (Flatpak)
+Scrape and Scrapec are available for installation on FlatHub.
+
+#### Scrape
+[![Get it from FlatHub](https://flathub.org/assets/badges/flathub-badge-en.svg)](https://flathub.org/repo/appstream/dev.paullee.scraterpreter.Scrape.flatpakref)
+```
+flatpak install flathub dev.paullee.scraterpreter.Scrape
+alias scrape='flatpak run dev.paullee.scraterpreter.Scrape' # Put this in your .*rc file. (Like .bashrc, .zshrc, etc.)
+```
+
+#### Scrapec
+[![Get it from FlatHub](https://flathub.org/assets/badges/flathub-badge-en.svg)](https://flathub.org/repo/appstream/dev.paullee.scraterpreter.Scrapec.flatpakref)
+```
+flatpak install flathub dev.paullee.scraterpreter.Scrapec
+alias scrapec='flatpak run dev.paullee.scraterpreter.Scrapec' # Put this in your .*rc file. (Like .bashrc, .zshrc, etc.)
+```
+
 ### Linux (Snap)
 Scrape Snaps are available for installation at the Snap Store.
 
