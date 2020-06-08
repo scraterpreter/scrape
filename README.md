@@ -7,8 +7,6 @@ First compile .sb3 files into .scrape files using [Scrapec](https://github.com/s
 
 Click [here](https://vimeo.com/424433102) to view a demo.
 
-Join our [Discord Server](https://discord.gg/3zV37x4) for support!
-
 See [COMPATIBILITY.md](COMPATIBILITY.md) for information on compatibility with Scratch.
 
 ## Installation and Usage
@@ -43,7 +41,7 @@ scraterpreter.scrape project.scrape # run the .scrape file
 ### Windows (MSI and PIP)
 Scrape is available as an MSI on our [releases page](https://github.com/scraterpreter/scrape/releases).
 Scrapec is available as [a PIP package on the PYPI](https://pypi.org/project/scrapec/).
-There may be some issues with PATH on Windows. Please contact us by creating [a GitHub issue](https://github.com/scraterpreter/scrape/issues/new) or by joining our [Discord Server](https://discord.gg/3zV37x4).
+There may be some issues with PATH on Windows. Please contact us by creating [a GitHub issue](https://github.com/scraterpreter/scrape/issues/new) or by sending us an email (contact AT paullee DOT dev).
 
 ### Binary
 If you follow the instructions listed below to build scrape, and instructions listed [here](https://github.com/scraterpreter/scrapec/blob/master/README.md) to compile scrapec, these commands should be used to run scrape.
