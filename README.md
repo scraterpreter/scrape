@@ -58,6 +58,5 @@ cd scrape
 mkdir build # creates the build directory
 cd build
 cmake .. # uses CMake to create a Makefile
-make # builds the source code
-make install # installs the binary
+make install # builds the source code and installs the binary
 ```
