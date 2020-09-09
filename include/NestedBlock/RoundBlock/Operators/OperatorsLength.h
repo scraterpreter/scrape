@@ -8,7 +8,7 @@
 class OperatorsLength : public RoundBlock
 {
 public:
-    std::string getValue() const override;
+    MultiType getValue() const override;
     OperatorsLength(std::shared_ptr<NestedBlock> s);
 private:
     std::shared_ptr<NestedBlock> str;

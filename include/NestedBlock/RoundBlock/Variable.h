@@ -2,14 +2,15 @@
 
 #include <string>
 #include "NestedBlock/RoundBlock/RoundBlock.h"
+#include "MultiType.h"
 
 class Variable : public RoundBlock
 {
 public:
-    std::string getValue() const override;
-    void setValue(std::string v);
+    MultiType getValue() const override;
+    void setValue(MultiType v);
     Variable(std::string v);
     Variable();
 private:
-    std::string val;
+    MultiType val;
 };

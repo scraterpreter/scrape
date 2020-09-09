@@ -8,7 +8,7 @@
 class OperatorsRandom : public RoundBlock
 {
 public:
-    std::string getValue() const override;
+    MultiType getValue() const override;
     OperatorsRandom(std::shared_ptr<NestedBlock> lb, std::shared_ptr<NestedBlock> ub);
 private:
     std::shared_ptr<NestedBlock> lower;

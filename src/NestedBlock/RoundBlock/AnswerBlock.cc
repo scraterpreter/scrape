@@ -1,12 +1,12 @@
 #include "NestedBlock/RoundBlock/AnswerBlock.h"
 #include "NestedBlock/RoundBlock/Variable.h"
 
-std::string AnswerBlock::getValue() const
+MultiType AnswerBlock::getValue() const
 {
     return answerVariable->getValue();
 }
 
-void AnswerBlock::setValue(std::string val)
+void AnswerBlock::setValue(MultiType val)
 {
     answerVariable->setValue(val);
 }

@@ -8,7 +8,7 @@
 class OperatorsRound : public RoundBlock
 {
 public:
-    std::string getValue() const override;
+    MultiType getValue() const override;
     OperatorsRound(std::shared_ptr<NestedBlock> n);
 private:
     std::shared_ptr<NestedBlock> num;

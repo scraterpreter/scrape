@@ -6,7 +6,7 @@ class GlobalTimer;
 class TimerBlock : public RoundBlock
 {
 public:
-    std::string getValue() const override;
+    MultiType getValue() const override;
     TimerBlock(std::shared_ptr<GlobalTimer> gt);
 private:
     std::shared_ptr<GlobalTimer> globalTimer;

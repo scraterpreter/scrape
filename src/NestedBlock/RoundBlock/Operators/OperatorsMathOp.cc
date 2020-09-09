@@ -9,37 +9,37 @@ namespace
     const double RAD = 57.29577951308232;
 }
 
-std::string OperatorsMathOp::getValue() const
+MultiType OperatorsMathOp::getValue() const
 {
     double inp = num->getDouble();
     double ans;
-    if (op->getValue() == "abs") {
+    if (op->getString() == "abs") {
         ans = std::abs(inp);
-    } else if (op->getValue() == "floor") {
+    } else if (op->getString() == "floor") {
         ans = floor(inp);
-    } else if (op->getValue() == "ceiling") {
+    } else if (op->getString() == "ceiling") {
         ans = ceil(inp);
-    } else if (op->getValue() == "sqrt") {
+    } else if (op->getString() == "sqrt") {
         ans = sqrt(inp);
-    } else if (op->getValue() == "sin") {
+    } else if (op->getString() == "sin") {
         ans = sin(inp/RAD);
-    } else if (op->getValue() == "cos") {
+    } else if (op->getString() == "cos") {
         ans = cos(inp/RAD);
-    } else if (op->getValue() == "tan") {
+    } else if (op->getString() == "tan") {
         ans = tan(inp/RAD);
-    } else if (op->getValue() == "asin") {
+    } else if (op->getString() == "asin") {
         ans = asin(inp)*RAD;
-    } else if (op->getValue() == "acos") {
+    } else if (op->getString() == "acos") {
         ans = acos(inp)*RAD;
-    } else if (op->getValue() == "atan") {
+    } else if (op->getString() == "atan") {
         ans = atan(inp)*RAD;
-    } else if (op->getValue() == "ln") {
+    } else if (op->getString() == "ln") {
         ans = log(inp);
-    } else if (op->getValue() == "log") {
+    } else if (op->getString() == "log") {
         ans = log10(inp);
-    } else if (op->getValue() == "e ^") {
+    } else if (op->getString() == "e ^") {
         ans = exp(inp);
-    } else if (op->getValue() == "10 ^") {
+    } else if (op->getString() == "10 ^") {
         ans = pow(10, inp);
     } else {
         ans = inp;

@@ -8,7 +8,7 @@
 class OperatorsLetterOf : public RoundBlock
 {
 public:
-    std::string getValue() const override;
+    MultiType getValue() const override;
     OperatorsLetterOf(std::shared_ptr<NestedBlock> l, std::shared_ptr<NestedBlock> s);
 private:
     std::shared_ptr<NestedBlock> letter;

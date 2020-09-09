@@ -3,9 +3,10 @@
 #include <string>
 #include "NestedBlock/NestedBlock.h"
 
+class MultiType;
+
 class RoundBlock : public NestedBlock
 {
 public:
-    virtual std::string getValue() const=0;
-    double getDouble() const override;
+    virtual MultiType getValue() const=0;
 };

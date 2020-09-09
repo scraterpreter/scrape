@@ -4,5 +4,5 @@
 class DaysSince2000 : public RoundBlock
 {
 public:
-    std::string getValue() const override;
+    MultiType getValue() const override;
 };

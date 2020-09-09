@@ -5,7 +5,7 @@ ListFindItem::ListFindItem(const std::shared_ptr<List> l,
     const std::shared_ptr<NestedBlock> val)
     : list(l),value(val) {}
 
-std::string ListFindItem::getValue() const
+MultiType ListFindItem::getValue() const
 {
     ListFindResult res=list->find(value->getValue());
     if(res.itemFound)
@@ -14,6 +14,6 @@ std::string ListFindItem::getValue() const
     }
     else
     {
-        return "0";
+        return MultiType("0");
     }
 }

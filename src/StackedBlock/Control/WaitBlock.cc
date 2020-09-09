@@ -11,5 +11,5 @@ WaitBlock::WaitBlock(const std::shared_ptr<NestedBlock> d)
 
 void WaitBlock::exec() const
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds((int)(std::stod(duration->getValue())*1000)));
+    std::this_thread::sleep_for(std::chrono::milliseconds((int)(duration->getDouble())*1000));
 }

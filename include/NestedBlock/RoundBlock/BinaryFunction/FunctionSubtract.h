@@ -6,6 +6,6 @@
 class FunctionSubtract : public BinaryFunction
 {
 public:
-    std::string getValue() const override;
+    MultiType getValue() const override;
     using BinaryFunction::BinaryFunction;
 };

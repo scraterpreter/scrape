@@ -9,7 +9,7 @@
 class OperatorsMathOp : public RoundBlock
 {
 public:
-    std::string getValue() const override;
+    MultiType getValue() const override;
     OperatorsMathOp(std::shared_ptr<Constant> o, std::shared_ptr<NestedBlock> n);
 private:
     std::shared_ptr<Constant> op;

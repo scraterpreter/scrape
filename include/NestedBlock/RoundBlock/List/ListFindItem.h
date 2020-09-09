@@ -7,7 +7,7 @@ class ListFindItem : public RoundBlock
 public:
     ListFindItem(const std::shared_ptr<List> l,
         const std::shared_ptr<NestedBlock> val);
-    std::string getValue() const override;
+    MultiType getValue() const override;
 private:
     const std::shared_ptr<List> list;
     const std::shared_ptr<NestedBlock> value;

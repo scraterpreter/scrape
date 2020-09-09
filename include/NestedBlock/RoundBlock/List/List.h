@@ -9,22 +9,22 @@ struct ListFindResult;
 class List : public RoundBlock
 {
 public:
-    std::string getValue() const override;
-    std::vector<std::string> getVector() const;
-    std::string getIndex(int index) const;
-    void setVector(std::vector<std::string> v);
-    void add(std::string v);
+    MultiType getValue() const override;
+    //std::vector<std::string> getVector() const;
+    MultiType getIndex(int index) const;
+    //void setVector(std::vector<std::string> v);
+    void add(MultiType v);
     void remove(int index);
     void clear();
-    void insert(int index, std::string v);
-    void replace(int index, std::string v);
+    void insert(int index, MultiType v);
+    void replace(int index, MultiType v);
     int length() const;
-    ListFindResult find(std::string v);
+    ListFindResult find(MultiType v);
 
     List(std::vector<std::string> v);
     List();
 private:
-    std::vector<std::string> val;
+    std::vector<MultiType> val;
 };
 
 struct ListFindResult

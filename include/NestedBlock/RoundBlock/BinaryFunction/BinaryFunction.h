@@ -8,7 +8,7 @@
 class BinaryFunction : public RoundBlock
 {
 public:
-    std::string getValue() const override=0;
+    MultiType getValue() const override=0;
     BinaryFunction(const std::shared_ptr<NestedBlock> l,const std::shared_ptr<NestedBlock> r);
 protected:
     const std::shared_ptr<NestedBlock> left, right;

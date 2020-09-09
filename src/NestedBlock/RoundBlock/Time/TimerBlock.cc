@@ -1,7 +1,7 @@
 #include "NestedBlock/RoundBlock/Time/TimerBlock.h"
 #include "GlobalTimer.h"
 
-std::string TimerBlock::getValue() const
+MultiType TimerBlock::getValue() const
 {
     return std::to_string(globalTimer->timeElapsedInSeconds());
 }

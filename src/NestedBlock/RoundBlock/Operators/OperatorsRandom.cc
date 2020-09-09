@@ -4,7 +4,7 @@
 #include <time.h>
 #include "NestedBlock/RoundBlock/Operators/OperatorsRandom.h"
 
-std::string OperatorsRandom::getValue() const
+MultiType OperatorsRandom::getValue() const
 {
     return std::to_string(rand() % (int)(upper->getDouble() - lower->getDouble() + 1) + (int)(lower->getDouble()));
 }

@@ -3,7 +3,7 @@
 #include <cmath>
 #include "NestedBlock/RoundBlock/Operators/OperatorsRound.h"
 
-std::string OperatorsRound::getValue() const
+MultiType OperatorsRound::getValue() const
 {
     return std::to_string(round(num->getDouble()));
 }

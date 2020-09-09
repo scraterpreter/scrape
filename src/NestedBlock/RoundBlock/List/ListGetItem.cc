@@ -5,7 +5,7 @@ ListGetItem::ListGetItem(const std::shared_ptr<List> l,
     const std::shared_ptr<NestedBlock> i)
     : list(l),index(i) {}
 
-std::string ListGetItem::getValue() const
+MultiType ListGetItem::getValue() const
 {
     int i=index->getDouble()-1;
     if(i>=0 && i<(list->length()))
@@ -14,6 +14,6 @@ std::string ListGetItem::getValue() const
     }
     else
     {
-        return "";
+        return MultiType("");
     }
 }

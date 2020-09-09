@@ -3,31 +3,31 @@
 #include <string>
 #include "NestedBlock/RoundBlock/List/List.h"
 
-std::string List::getValue() const
+MultiType List::getValue() const
 {
     std::string output;
-    for (std::string i:val) {
-        output.append(i + " ");
+    for (MultiType i : val) {
+        output.append(i.getString() + " ");
     }
     return output.substr(0, output.length()-1);
 }
-
-std::vector<std::string> List::getVector() const
+/*
+MultiType<std::string> List::getVector() const
 {
     return val;
 }
-
-std::string List::getIndex(int index) const
+*/
+MultiType List::getIndex(int index) const
 {
     return val[index];
 }
-
-void List::setVector(std::vector<std::string> v)
+/*
+void List::setVector(std::vector<MultiType> v)
 {
     val = v;
 }
-
-void List::add(std::string v)
+*/
+void List::add(MultiType v)
 {
     val.push_back(v);
 }
@@ -42,12 +42,12 @@ void List::clear()
     val.clear();
 }
 
-void List::insert(int index, std::string v)
+void List::insert(int index, MultiType v)
 {
     val.insert(val.begin()+index, v);
 }
 
-void List::replace(int index, std::string v)
+void List::replace(int index, MultiType v)
 {
     val[index] = v;
 }
@@ -57,9 +57,9 @@ int List::length() const
     return val.size();
 }
 
-ListFindResult List::find(std::string v)
+ListFindResult List::find(MultiType v)
 {
-    std::vector<std::string>::iterator it=std::find(val.begin(),
+    std::vector<MultiType>::iterator it=std::find(val.begin(),
         val.end(),v);
     ListFindResult res;
     if(it==val.end())
@@ -75,5 +75,8 @@ ListFindResult List::find(std::string v)
     return res;
 }
 
-List::List(std::vector<std::string> v) : val(v) {}
+List::List(std::vector<std::string> v) 
+{
+    val.assign(v.begin(),v.end()); // vector::assign converts string to MultiType
+}
 List::List(){}

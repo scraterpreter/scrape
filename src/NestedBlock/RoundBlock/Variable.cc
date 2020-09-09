@@ -1,15 +1,15 @@
 #include <string>
 #include "NestedBlock/RoundBlock/Variable.h"
 
-std::string Variable::getValue() const
+MultiType Variable::getValue() const
 {
     return val;
 }
 
-void Variable::setValue(std::string v)
+void Variable::setValue(MultiType v)
 {
     val = v;
 }
 
 Variable::Variable(std::string v) : val(v) {}
-Variable::Variable(){} // default constructor
+Variable::Variable() : val("dummy"){} // default constructor

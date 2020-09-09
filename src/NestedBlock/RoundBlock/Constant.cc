@@ -1,7 +1,7 @@
 #include <string>
 #include "NestedBlock/RoundBlock/Constant.h"
 
-std::string Constant::getValue() const
+MultiType Constant::getValue() const
 {
     return val;
 }

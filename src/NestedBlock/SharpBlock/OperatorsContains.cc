@@ -7,7 +7,7 @@ OperatorsContains::OperatorsContains(const std::shared_ptr<NestedBlock> s1,
 
 bool OperatorsContains::getBool() const
 {
-    if (str1->getValue().find(str2->getValue()) != std::string::npos) {
+    if (str1->getString().find(str2->getString()) != std::string::npos) {
         return true;
     } else {
         return false;

@@ -10,5 +10,5 @@ RepeatBlock::RepeatBlock(const std::shared_ptr<NestedBlock> t,
 
 void RepeatBlock::exec() const
 {
-    for(int i=0; i<std::stod(times->getValue()); i++) loopBody->execAll();
+    for(int i=0; i<times->getDouble(); i++) loopBody->execAll();
 }

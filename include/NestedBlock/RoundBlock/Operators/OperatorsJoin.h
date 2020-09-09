@@ -8,7 +8,7 @@
 class OperatorsJoin : public RoundBlock
 {
 public:
-    std::string getValue() const override;
+    MultiType getValue() const override;
     OperatorsJoin(std::shared_ptr<NestedBlock> lb, std::shared_ptr<NestedBlock> rb);
 private:
     std::shared_ptr<NestedBlock> left;

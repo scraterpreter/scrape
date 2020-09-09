@@ -2,9 +2,9 @@
 #include <memory>
 #include "NestedBlock/RoundBlock/Operators/OperatorsLength.h"
 
-std::string OperatorsLength::getValue() const
+MultiType OperatorsLength::getValue() const
 {
-    return std::to_string(str->getValue().length());
+    return std::to_string(str->getString().length());
 }
 
 OperatorsLength::OperatorsLength(std::shared_ptr<NestedBlock> s) : str(s) {}

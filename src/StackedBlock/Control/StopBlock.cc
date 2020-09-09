@@ -5,7 +5,7 @@ StopBlock::StopBlock(std::shared_ptr<Constant> opt) : option(opt) {}
 
 void StopBlock::exec() const
 {
-    if(option->getValue()=="all" || option->getValue()=="this script")
+    if(option->getString()=="all" || option->getString()=="this script")
     {
         throw StopBlockCalledException();
     }

@@ -6,7 +6,8 @@
 class SharpBlock : public NestedBlock
 {
 public:
+    MultiType getValue() const override;
     virtual bool getBool() const=0;
-    std::string getValue() const override;
-    double getDouble() const override;
+    std::string getString() override;
+    double getDouble() override;
 };

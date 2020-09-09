@@ -1,7 +1,7 @@
 #include "NestedBlock/RoundBlock/Time/DaysSince2000.h"
 #include "time.h"
 
-std::string DaysSince2000::getValue() const
+MultiType DaysSince2000::getValue() const
 {
     time_t rawCurrentTime=time(nullptr);
     tm currentTimeInfo=*gmtime(&rawCurrentTime); // UTC time
