@@ -9,7 +9,14 @@ Click [here](https://vimeo.com/424433102) to view a demo.
 
 See [COMPATIBILITY.md](COMPATIBILITY.md) for information on compatibility with Scratch.
 
-## Installation and Usage
+## Usage
+To run a .sb3 file using Scrape, install Scrape and Scrapec using the instructions in the [Installation](#installation) section, and then use the following commands:
+```bash
+scrapec project.sb3 # compile the .sb3 file into a .scrape file
+scrape project.scrape # run the .scrape file
+```
+
+## Installation
 ### Linux (Flatpak)
 Scrape and Scrapec are available for installation on FlatHub.
 
@@ -42,13 +49,6 @@ scraterpreter.scrape project.scrape # run the .scrape file
 Scrape is available as an MSI on our [releases page](https://github.com/scraterpreter/scrape/releases).
 Scrapec is available as [a PIP package on the PYPI](https://pypi.org/project/scrapec/).
 There may be some issues with PATH on Windows. Please contact us by creating [a GitHub issue](https://github.com/scraterpreter/scrape/issues/new) or by sending us an email (contact AT paullee DOT dev).
-
-### Binary
-If you follow the instructions listed below to build scrape, and instructions listed [here](https://github.com/scraterpreter/scrapec/blob/master/README.md) to compile scrapec, these commands should be used to run scrape.
-```bash
-scrapec project.sb3 # compile the .sb3 file into a .scrape file
-scrape project.scrape # run the .scrape file
-```
 
 ## Build Instructions
 ### Linux
