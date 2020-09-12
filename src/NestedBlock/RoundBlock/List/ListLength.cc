@@ -6,5 +6,5 @@ ListLength::ListLength(const std::shared_ptr<List> l)
 
 MultiType ListLength::getValue() const
 {
-    return std::to_string(list->length());
+    return list->length();
 }

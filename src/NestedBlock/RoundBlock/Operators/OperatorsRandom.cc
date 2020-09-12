@@ -6,7 +6,7 @@
 
 MultiType OperatorsRandom::getValue() const
 {
-    return std::to_string(rand() % (int)(upper->getDouble() - lower->getDouble() + 1) + (int)(lower->getDouble()));
+    return rand() % (int)(upper->getDouble() - lower->getDouble() + 1) + (int)(lower->getDouble());
 }
 
 OperatorsRandom::OperatorsRandom(std::shared_ptr<NestedBlock> lb, std::shared_ptr<NestedBlock> ub) : lower(lb), upper(ub) {}

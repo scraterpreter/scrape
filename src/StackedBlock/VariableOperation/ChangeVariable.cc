@@ -10,6 +10,6 @@ ChangeVariable::ChangeVariable(std::shared_ptr<Variable> var,
 
 void ChangeVariable::exec() const
 {
-    variable->setValue(std::to_string(variable->getDouble()+
-        value->getDouble()));
+    variable->setValue(variable->getDouble()+
+        value->getDouble());
 }

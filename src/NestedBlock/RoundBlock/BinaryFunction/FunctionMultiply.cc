@@ -3,5 +3,5 @@
 
 MultiType FunctionMultiply::getValue() const
 {
-    return std::to_string(left->getDouble()*right->getDouble());
+    return left->getDouble()*right->getDouble();
 }

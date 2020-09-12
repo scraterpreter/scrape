@@ -4,7 +4,7 @@
 
 MultiType OperatorsLength::getValue() const
 {
-    return std::to_string(str->getString().length());
+    return str->getString().length();
 }
 
 OperatorsLength::OperatorsLength(std::shared_ptr<NestedBlock> s) : str(s) {}

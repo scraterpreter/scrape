@@ -18,5 +18,5 @@ MultiType DaysSince2000::getValue() const
     time_t year2000Time=mktime(&year2000);
 
     const double secondsInDay=86400;
-    return std::to_string(difftime(currentTime,year2000Time)/secondsInDay);
+    return difftime(currentTime,year2000Time)/secondsInDay;
 }

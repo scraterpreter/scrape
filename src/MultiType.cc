@@ -1,4 +1,14 @@
 #include "MultiType.h"
+#include <ostream> // the code will compile on g++ without this "include" statement, but you'll get a very weird bug
+                   // Explanation: without this statement, when you call "ostream& operator<<(std::ostream& out, const MultiType& obj)",
+                   // this is what will happen if the MultiType passed in is a double: (if it's a string, this operator will behave as expected)
+                   // 1. obj.type is checked and it is a DOUBLE
+                   // 2. "out << obj.doubleVar" is called, but since we haven't included ostream, the compiler can't find the function "ostream& operator<< (double val);"
+                   // 3. As a result, the compiler implicitly converts obj.doubleVar to a MultiType using the constructor MultiType::MultiType(double d)
+                   // 4. This newly created MultiType is then passed back to "ostream& operator<<(std::ostream& out, const MultiType& obj)"
+                   // 5. Go back to step 1
+                   // 6. This infinite recursion causes a stack overflow and the program crashes.
+                   // This is one of the weirdest bugs I've ever seen! Lesson learned: implicit conversions are dangerous.
 
 MultiType::MultiType(const std::string &s)
 {

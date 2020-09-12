@@ -44,7 +44,7 @@ MultiType OperatorsMathOp::getValue() const
     } else {
         ans = inp;
     }
-    return std::to_string(ans);
+    return ans;
 }
 
 OperatorsMathOp::OperatorsMathOp(std::shared_ptr<Constant> o, std::shared_ptr<NestedBlock> n) : op(o), num(n) {}

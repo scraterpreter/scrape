@@ -10,10 +10,10 @@ MultiType ListFindItem::getValue() const
     ListFindResult res=list->find(value->getValue());
     if(res.itemFound)
     {
-        return std::to_string(res.index+1);
+        return res.index+1;
     }
     else
     {
-        return MultiType("0");
+        return MultiType(0);
     }
 }

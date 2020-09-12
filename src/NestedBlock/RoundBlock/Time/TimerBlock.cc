@@ -3,7 +3,7 @@
 
 MultiType TimerBlock::getValue() const
 {
-    return std::to_string(globalTimer->timeElapsedInSeconds());
+    return globalTimer->timeElapsedInSeconds();
 }
 
 TimerBlock::TimerBlock(std::shared_ptr<GlobalTimer> gt) : globalTimer(gt) {}
