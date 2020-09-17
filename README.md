@@ -22,14 +22,14 @@ Scrape and Scrapec are available for installation on FlatHub.
 
 #### Scrape
 Flatpakref: https://flathub.org/repo/appstream/dev.paullee.scraterpreter.Scrape.flatpakref
-```
+```bash
 flatpak install flathub dev.paullee.scraterpreter.Scrape
 alias scrape='flatpak run dev.paullee.scraterpreter.Scrape' # Put this in your .*rc file. (Like .bashrc, .zshrc, etc.)
 ```
 
 #### Scrapec
 Flatpakref: https://flathub.org/repo/appstream/dev.paullee.scraterpreter.Scrapec.flatpakref
-```
+```bash
 flatpak install flathub dev.paullee.scraterpreter.Scrapec
 alias scrapec='flatpak run dev.paullee.scraterpreter.Scrapec' # Put this in your .*rc file. (Like .bashrc, .zshrc, etc.)
 ```
@@ -41,8 +41,10 @@ Scrape Snaps are available for installation at the Snap Store.
 
 ```bash
 sudo snap install scraterpreter # install scrape
-scraterpreter.scrapec project.sb3 # compile the .sb3 file into a .scrape file
-scraterpreter.scrape project.scrape # run the .scrape file
+
+# Add the following aliases to your .*rc file. (Like .bashrc, .zshrc, etc.)
+alias scrape=scraterpreter.scrape
+alias scrapec=scraterpreter.scrapec
 ```
 
 ### Windows (MSI and PIP)
